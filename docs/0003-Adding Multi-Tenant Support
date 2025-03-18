@@ -20,7 +20,6 @@ The proposed solution is to implement multi-tenant support by:
 3. Dynamic Branding and API Configuration: Based on the user's selection, the app will load the appropriate branding (logos, colors) and use the corresponding API and authentication URLs.
 This solution will enable the app to dynamically adjust to different institutions without requiring backend modifications or separate app versions.
 
-
 Project Impact
 **************
 
