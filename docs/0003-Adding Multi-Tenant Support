@@ -1,0 +1,85 @@
+Adding Multi-Tenant Support to Open edX Mobile App
+#############################################################
+
+Date: 18 March 2025
+
+Status
+******
+Pending 
+
+Context
+*******
+The goal of this proposal is to introduce multi-tenant support in the Open edX mobile app, allowing users to select their institution (tenant) from a list of pre-configured options upon app launch. Each tenant will have its own distinct branding, logo, color scheme, and API URLs, but there will be no changes to the backend. This will essentially be a white-labeling solution, with the impact focused entirely on the app’s interface and user experience.
+
+Decision
+********
+
+The proposed solution is to implement multi-tenant support by:
+1. Tenant Configuration File: Create a configuration file containing all the tenant-specific details (branding, API URLs, authentication URLs, etc.).
+2. Tenant Selection Screen: Add a screen at the launch of the app where the user can choose which institution (tenant) they belong to.
+3. Dynamic Branding and API Configuration: Based on the user's selection, the app will load the appropriate branding (logos, colors) and use the corresponding API and authentication URLs.
+This solution will enable the app to dynamically adjust to different institutions without requiring backend modifications or separate app versions.
+
+
+Project Impact
+**************
+
+- Mobile App Interface: The primary impact will be on the user interface. The app will display a tenant selection screen at launch, allowing users to choose their institution. The app’s design elements (e.g., logo, color scheme) will be dynamically loaded based on the selected tenant.
+- Branding and Customization: Each tenant will have its own custom branding (logos, color schemes), providing a tailored experience for each institution.
+- API and Authentication Flows: After the tenant is selected, the app will redirect users to the appropriate authentication and API endpoints specific to that institution, ensuring the app functions correctly for each tenant.
+- No Backend Changes: The backend of the Open edX platform will remain unchanged at this stage. This solution solely affects the front-end mobile app and how it interacts with the API, making it a white-label solution.
+
+Implementation
+**************
+
+1. Create Tenant Configuration File:
+A JSON configuration file will be created containing all tenant-specific details, such as:
+tenant_name (e.g., "University A")
+display_name (e.g., "University A")
+logo_url (URL for tenant's logo)
+primary_color (Hex code for primary brand color)
+api_base_url (Base URL for tenant-specific API)
+auth_url (Authentication URL for tenant)
+Example configuration file:
+{
+  "tenants": [
+    {
+      "name": "tenant_a",
+      "display_name": "University A",
+      "logo_url": "https://example.com/tenant_a/logo.png",
+      "primary_color": "#FF5733",
+      "api_base_url": "https://tenant_a.example.com/api",
+      "auth_url": "https://tenant_a.example.com/auth"
+    },
+    {
+      "name": "tenant_b",
+      "display_name": "University B",
+      "logo_url": "https://example.com/tenant_b/logo.png",
+      "primary_color": "#33CFFF",
+      "api_base_url": "https://tenant_b.example.com/api",
+      "auth_url": "https://tenant_b.example.com/auth"
+    }
+  ]
+}
+
+
+2. Implement Tenant Selection Screen:
+Upon app launch, present the user with a screen that allows them to select their institution (tenant). This screen will display:
+The name of each tenant (as display_name in the configuration).
+The tenant's logo (using the logo_url from the configuration).
+Optionally, search bar and/or categories.
+Once a tenant is selected, the app will proceed to the authentication flow for that tenant.
+3. Adapt Authentication Flow:
+After selecting a tenant, the app will use the tenant’s unique auth_url for the authentication process.
+Similarly, the app will use the api_base_url for making API requests to the tenant-specific backend.
+4. Local Storage of Tenant Data:
+The selected tenant’s configuration will be stored locally (e.g., using SharedPreferences on Android or iOS) to ensure the user's selection persists across sessions.
+
+
+Alternatives
+************
+
+1. Separate App Versions for Each Tenant.
+2. Use of Remote Configuration.
+3. Custom Login Screen.
+
