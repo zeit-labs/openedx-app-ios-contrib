@@ -2,7 +2,9 @@ API_HOST_URL: 'http://localhost:8000'
 SSO_URL: 'http://localhost:8000'
 SSO_FINISHED_URL:  'http://localhost:8000'
 ENVIRONMENT_DISPLAY_NAME: 'Localhost'
+IS_EMAIL_FEEDBACK_ENABLED: true
 FEEDBACK_EMAIL_ADDRESS: 'support@example.com'
+FEEDBACK_FORM_URL: 'http://localhost:8000'
 OAUTH_CLIENT_ID: ''
 
 SSO_BUTTON_TITLE:

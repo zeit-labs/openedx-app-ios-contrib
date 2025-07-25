@@ -15,7 +15,9 @@ public protocol ConfigProtocol: Sendable {
     var ssoButtonTitle: [String: Any] { get }
     var oAuthClientId: String { get }
     var tokenType: TokenType { get }
+    var isEmailFeedbackEnabled: Bool { get}
     var feedbackEmail: String { get }
+    var feedbackFormUrl: URL { get }
     var appStoreLink: String { get }
     var faq: URL? { get }
     var platformName: String { get }
@@ -49,7 +51,9 @@ private enum ConfigKeys: String, Sendable {
     case ssoButtonTitle = "SSO_BUTTON_TITLE"
     case oAuthClientID = "OAUTH_CLIENT_ID"
     case tokenType = "TOKEN_TYPE"
+    case isEmailFeedbackEnabled = "IS_EMAIL_FEEDBACK_ENABLED"
     case feedbackEmailAddress = "FEEDBACK_EMAIL_ADDRESS"
+    case feedbackFormUrl = "FEEDBACK_FORM_URL"
     case environmentDisplayName = "ENVIRONMENT_DISPLAY_NAME"
     case platformName = "PLATFORM_NAME"
     case organizationCode = "ORGANIZATION_CODE"
@@ -163,8 +167,20 @@ extension Config: ConfigProtocol {
         return tokenType
     }
     
+    public var isEmailFeedbackEnabled: Bool {
+        return bool(for: ConfigKeys.isEmailFeedbackEnabled.rawValue)
+    }
+    
     public var feedbackEmail: String {
         return string(for: ConfigKeys.feedbackEmailAddress.rawValue) ?? ""
+    }
+
+    public var feedbackFormUrl: URL {
+        guard let urlString = string(for: ConfigKeys.feedbackFormUrl.rawValue),
+              let url = URL(string: urlString) else {
+            fatalError("Unable to find feedback form url in config.")
+        }
+        return url
     }
 
     public var platformName: String {

@@ -152,6 +152,11 @@ public final class SettingsViewModel: ObservableObject {
         let emailURL = URL(string: "mailto:\(recipientAddress)?subject=\(emailSubject)&body=\(emailBody)")
         return emailURL
     }
+    
+    func contactSupportForm() -> URL? {
+        let contactSupportFormURL = config.feedbackFormUrl
+        return contactSupportFormURL
+    }
 
     func update(downloadQuality: DownloadQuality) async {
         self.userSettings.downloadQuality = downloadQuality

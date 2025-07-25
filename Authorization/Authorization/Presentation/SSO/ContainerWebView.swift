@@ -44,3 +44,7 @@ public struct ContainerWebView: View {
         }
     }
 }
+#Preview {
+    let config = ConfigMock()
+    ContainerWebView(config.baseSSOURL.absoluteString, title: "Login")
+}

@@ -31,7 +31,11 @@ struct ProfileSupportInfoView: View {
             .padding(.top, 12)
         
         VStack(alignment: .leading, spacing: 24) {
-            viewModel.contactSupport().map(supportInfo)
+            if viewModel.config.isEmailFeedbackEnabled {
+                viewModel.contactSupport().map(supportInfo)
+            } else {
+                viewModel.contactSupportForm().map(supportFormInfo)
+            }
             viewModel.config.agreement.tosURL.map(terms)
             viewModel.config.agreement.privacyPolicyURL.map(privacy)
             viewModel.config.agreement.cookiePolicyURL.map(cookiePolicy)
@@ -58,6 +62,18 @@ struct ProfileSupportInfoView: View {
         )
     }
 
+    private func supportFormInfo(url: URL) -> some View {
+        button(
+            linkViewModel: .init(
+                url: url,
+                title: ProfileLocalization.contact
+            ),
+            isEmailSupport: false,
+            supportType: .contactSupport,
+            identifier: "contact_support_form"
+        )
+    }
+    
     private func terms(url: URL) -> some View {
         navigationLink(
             viewModel: .init(
@@ -144,7 +160,6 @@ struct ProfileSupportInfoView: View {
                 self.viewModel.trackPrivacyPolicyClicked()
             case .sellData:
                 self.viewModel.trackDataSellClicked()
-                
             default:
                 break
             }
@@ -172,16 +187,11 @@ struct ProfileSupportInfoView: View {
                 return
             }
             
-            switch supportType {
-            case .contactSupport:
-                viewModel.trackEmailSupportClicked()
-            case .faq:
-                viewModel.trackFAQClicked()
-            default:
-                break
+            if isEmailSupport {
+                UIApplication.shared.open(linkViewModel.url)
+            } else {
+                viewModel.router.showWebBrowser(title: "", url: linkViewModel.url)
             }
-            
-            UIApplication.shared.open(linkViewModel.url)
         } label: {
             HStack {
                 Text(linkViewModel.title)

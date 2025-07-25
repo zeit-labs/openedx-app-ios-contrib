@@ -14,8 +14,6 @@
 	<false/>
 	<key>FirebaseCrashlyticsCollectionEnabled</key>
 	<true/>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>googlegmail</string>
