@@ -11,6 +11,8 @@ import OEXFoundation
 import Kingfisher
 import WebKit
 import Theme
+import Payment
+import Swinject
 
 public struct CourseDetailsView: View {
     
@@ -217,6 +219,19 @@ public struct CourseDetailsView: View {
             Theme.Colors.background
                 .ignoresSafeArea()
         )
+        // MARK: - Payment Upgrade Sheet
+        .courseUpgradeSheet(
+            isPresented: $viewModel.showUpgradeSheet,
+            viewModel: viewModel.upgradeViewModel ?? Container.shared.resolve(
+                CourseUpgradeViewModel.self,
+                arguments: courseID, ""
+            )!,
+            onSuccess: { _ in
+                Task {
+                    await viewModel.getCourseDetail(courseID: courseID, withProgress: false)
+                }
+            }
+        )
     }
 }
 
@@ -235,101 +250,118 @@ private struct CourseStateView: View {
     }
     
     var body: some View {
-        switch viewModel.courseState() {
-        case .enrollOpen:
-            Group {
-            if viewModel.connectivity.isInternetAvaliable {
-                    StyledButton(DiscoveryLocalization.Details.enrollNow, action: {
-                        if !viewModel.userloggedIn {
-                            viewModel.router.presentView(
-                                transitionStyle: .crossDissolve,
-                                animated: true
-                            ) {
-                                AlertView(
-                                    alertTitle: DiscoveryLocalization.Alert.authorization,
-                                    alertMessage: DiscoveryLocalization.Alert.pleaseEnterTheSystem,
-                                    positiveAction: CoreLocalization.Alert.signIn,
-                                    onCloseTapped: {
-                                        self.viewModel.router.dismiss(animated: true)
-                                    },
-                                    firstButtonTapped: {
-                                        self.viewModel.router.dismiss(animated: false)
-                                        viewModel.router.showLoginScreen(
-                                            sourceScreen: .courseDetail(
-                                                courseDetails.courseID,
-                                                viewModel.courseDetails?.courseTitle ?? ""
+        VStack(spacing: 0) {
+            switch viewModel.courseState() {
+            case .enrollOpen:
+                Group {
+                if viewModel.connectivity.isInternetAvaliable {
+                        StyledButton(DiscoveryLocalization.Details.enrollNow, action: {
+                            if !viewModel.userloggedIn {
+                                viewModel.router.presentView(
+                                    transitionStyle: .crossDissolve,
+                                    animated: true
+                                ) {
+                                    AlertView(
+                                        alertTitle: DiscoveryLocalization.Alert.authorization,
+                                        alertMessage: DiscoveryLocalization.Alert.pleaseEnterTheSystem,
+                                        positiveAction: CoreLocalization.Alert.signIn,
+                                        onCloseTapped: {
+                                            self.viewModel.router.dismiss(animated: true)
+                                        },
+                                        firstButtonTapped: {
+                                            self.viewModel.router.dismiss(animated: false)
+                                            viewModel.router.showLoginScreen(
+                                                sourceScreen: .courseDetail(
+                                                    courseDetails.courseID,
+                                                    viewModel.courseDetails?.courseTitle ?? ""
+                                                )
                                             )
-                                        )
-                                    },
-                                    secondButtonTapped: {
-                                        self.viewModel.router.dismiss(animated: false)
-                                        viewModel.router.showRegisterScreen(
-                                            sourceScreen: .courseDetail(
-                                                courseDetails.courseID,
-                                                courseDetails.courseTitle)
-                                        )
+                                        },
+                                        secondButtonTapped: {
+                                            self.viewModel.router.dismiss(animated: false)
+                                            viewModel.router.showRegisterScreen(
+                                                sourceScreen: .courseDetail(
+                                                    courseDetails.courseID,
+                                                    courseDetails.courseTitle)
+                                            )
 
-                                    },
-                                    type: .authorization
-                                )
+                                        },
+                                        type: .authorization
+                                    )
+                                }
+                            } else {
+                                Task {
+                                    await viewModel.enrollToCourse(id: courseDetails.courseID)
+                                }
                             }
+                        })
+                        .padding(16)
+                    } else {
+                        HStack(alignment: .center, spacing: 10) {
+                            CoreAssets.noWifiMini.swiftUIImage
+                                .renderingMode(.template)
+                                .foregroundStyle(Theme.Colors.warning)
+                            Text(DiscoveryLocalization.Details.enrollmentNoInternet)
+                                .multilineTextAlignment(.leading)
+                                .font(Theme.Fonts.titleSmall)
+                            Spacer()
+                        }.cardStyle(
+                            paddingAll: 12,
+                            bgColor: Theme.Colors.textInputUnfocusedBackground,
+                            strokeColor: .clear
+                        )
+                    }
+                }
+                .accessibilityIdentifier("enroll_button")
+            case .enrollClose:
+                Text(DiscoveryLocalization.Details.enrollmentDateIsOver)
+                    .multilineTextAlignment(.center)
+                    .font(Theme.Fonts.titleSmall)
+                    .cardStyle()
+                    .padding(.vertical, 24)
+                    .accessibilityIdentifier("date_over_text")
+            case .alreadyEnrolled:
+                VStack(spacing: 0) {
+                    StyledButton(DiscoveryLocalization.Details.viewCourse, action: {
+                        if !viewModel.userloggedIn {
+                            viewModel.router.showRegisterScreen(
+                                sourceScreen: .courseDetail(
+                                    courseDetails.courseID,
+                                    courseDetails.courseTitle)
+                            )
                         } else {
-                            Task {
-                                await viewModel.enrollToCourse(id: courseDetails.courseID)
-                            }
+                            viewModel.viewCourseClicked(
+                                courseId: courseDetails.courseID,
+                                courseName: courseDetails.courseTitle
+                            )
+                            viewModel.router.showCourseScreens(
+                                courseID: courseDetails.courseID,
+                                hasAccess: nil,
+                                courseStart: courseDetails.courseStart,
+                                courseEnd: courseDetails.courseEnd,
+                                enrollmentStart: courseDetails.enrollmentStart,
+                                enrollmentEnd: courseDetails.enrollmentEnd,
+                                title: title,
+                                courseRawImage: courseDetails.courseRawImage,
+                                showDates: false,
+                                lastVisitedBlockID: nil
+                            )
                         }
                     })
                     .padding(16)
-                } else {
-                    HStack(alignment: .center, spacing: 10) {
-                        CoreAssets.noWifiMini.swiftUIImage
-                            .renderingMode(.template)
-                            .foregroundStyle(Theme.Colors.warning)
-                        Text(DiscoveryLocalization.Details.enrollmentNoInternet)
-                            .multilineTextAlignment(.leading)
-                            .font(Theme.Fonts.titleSmall)
-                        Spacer()
-                    }.cardStyle(paddingAll: 12, bgColor: Theme.Colors.textInputUnfocusedBackground, strokeColor: .clear)
+                    .accessibilityIdentifier("view_course_button")
+                    
+                    if let upgradeVM = viewModel.upgradeViewModel {
+                        UpgradeButtonView(price: upgradeVM.upgradeProduct?.displayPrice) {
+                            viewModel.showUpgradeSheet = true
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 16)
+                    }
                 }
             }
-            .accessibilityIdentifier("enroll_button")
-        case .enrollClose:
-            Text(DiscoveryLocalization.Details.enrollmentDateIsOver)
-                .multilineTextAlignment(.center)
-                .font(Theme.Fonts.titleSmall)
-                .cardStyle()
-                .padding(.vertical, 24)
-                .accessibilityIdentifier("date_over_text")
-        case .alreadyEnrolled:
-            StyledButton(DiscoveryLocalization.Details.viewCourse, action: {
-                if !viewModel.userloggedIn {
-                    viewModel.router.showRegisterScreen(
-                        sourceScreen: .courseDetail(
-                            courseDetails.courseID,
-                            courseDetails.courseTitle)
-                    )
-                } else {
-                    viewModel.viewCourseClicked(
-                        courseId: courseDetails.courseID,
-                        courseName: courseDetails.courseTitle
-                    )
-                    viewModel.router.showCourseScreens(
-                        courseID: courseDetails.courseID,
-                        hasAccess: nil,
-                        courseStart: courseDetails.courseStart,
-                        courseEnd: courseDetails.courseEnd,
-                        enrollmentStart: courseDetails.enrollmentStart,
-                        enrollmentEnd: courseDetails.enrollmentEnd,
-                        title: title,
-                        courseRawImage: courseDetails.courseRawImage,
-                        showDates: false,
-                        lastVisitedBlockID: nil
-                    )
-                }
-            })
-            .padding(16)
-            .accessibilityIdentifier("view_course_button")
         }
+        
     }
 }
 
@@ -440,7 +472,8 @@ struct CourseDetailsView_Previews: PreviewProvider {
             config: ConfigMock(),
             cssInjector: CSSInjectorMock(),
             connectivity: Connectivity(),
-            storage: CoreStorageMock()
+            storage: CoreStorageMock(),
+            container: Container.shared
         )
         
         CourseDetailsView(

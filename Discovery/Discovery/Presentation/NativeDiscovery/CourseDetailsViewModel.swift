@@ -8,6 +8,8 @@
 import Foundation
 import Core
 import SwiftUI
+import Payment
+import Swinject
 
 public enum CourseState {
     case enrollOpen
@@ -22,6 +24,9 @@ public final class CourseDetailsViewModel: ObservableObject {
     @Published private(set) var isShowProgress = false
     @Published var showError: Bool = false
     @Published var isHorisontal: Bool = false
+    @Published var showUpgradeSheet: Bool = false
+    var upgradeViewModel: CourseUpgradeViewModel?
+    
     var errorMessage: String? {
         didSet {
             withAnimation {
@@ -37,6 +42,7 @@ public final class CourseDetailsViewModel: ObservableObject {
     let cssInjector: CSSInjector
     let connectivity: ConnectivityProtocol
     let storage: CoreStorage
+    private let container: Swinject.Container
     
     var userloggedIn: Bool {
         return !(storage.user?.username?.isEmpty ?? true)
@@ -49,7 +55,8 @@ public final class CourseDetailsViewModel: ObservableObject {
         config: ConfigProtocol,
         cssInjector: CSSInjector,
         connectivity: ConnectivityProtocol,
-        storage: CoreStorage
+        storage: CoreStorage,
+        container: Swinject.Container
     ) {
         self.interactor = interactor
         self.router = router
@@ -58,6 +65,7 @@ public final class CourseDetailsViewModel: ObservableObject {
         self.cssInjector = cssInjector
         self.connectivity = connectivity
         self.storage = storage
+        self.container = container
     }
     
     @MainActor
@@ -66,9 +74,17 @@ public final class CourseDetailsViewModel: ObservableObject {
         do {
             if connectivity.isInternetAvaliable {
                 courseDetails = try await interactor.getCourseDetails(courseID: courseID)
-                if let isEnrolled = courseDetails?.isEnrolled {
-                    self.courseDetails?.isEnrolled = isEnrolled
-                }
+                print("🟡🟡🟡🟡🟡🟡 getCourseDetail 🟡🟡🟡🟡🟡🟡\n \(courseDetails?.courseModes)")
+//                if let sku = courseDetails?.courseModes?.first(where: { $0.slug == "verified" })?.iosSku {
+                    print("🛑🛑🛑🛑🛑 getCourseDetail verified 🛑🛑🛑🛑🛑")
+                    self.upgradeViewModel = container.resolve(
+                        CourseUpgradeViewModel.self,
+                        arguments: courseID, "org.openedx.app.course_upgrade_verified")
+//                }
+                
+//                if let isEnrolled = courseDetails?.isEnrolled {
+//                    self.courseDetails?.isEnrolled = isEnrolled
+//                }
                 
                 isShowProgress = false
             } else {
@@ -123,6 +139,7 @@ public final class CourseDetailsViewModel: ObservableObject {
             _ = try await interactor.enrollToCourse(courseID: id)
             analytics.courseEnrollSuccess(courseId: id, courseName: courseDetails?.courseTitle ?? "")
             courseDetails?.isEnrolled = true
+            print("🪀🪀🪀🪀🪀🪀 enrollToCourse 🪀🪀🪀🪀🪀🪀🪀\n \(courseDetails?.courseModes)")
             NotificationCenter.default.post(name: .onCourseEnrolled, object: id)
         } catch let error {
             if error.isInternetError || error is NoCachedDataError {

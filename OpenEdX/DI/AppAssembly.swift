@@ -18,6 +18,7 @@ import Authorization
 import Downloads
 import Profile
 import WhatsNew
+import Payment
 
 // swiftlint:disable function_body_length
 class AppAssembly: Assembly {
@@ -234,6 +235,29 @@ class AppAssembly: Assembly {
                 courseInteractor: r.resolve(CourseInteractorProtocol.self)!,
                 courseDropDownNavigationEnabled: config.uiComponents.courseDropDownNavigationEnabled
             )
+        }.inObjectScope(.container)
+        
+        // MARK: Payment 
+        container.register(PendingTransactionStore.self) { _ in
+            return PendingTransactionStore.shared
+        }.inObjectScope(.container)
+
+        container.register(PaymentServiceProtocol.self) { r in
+            PaymentManager(
+                api: r.resolve(API.self)!,
+                config: r.resolve(ConfigProtocol.self)!
+            )
+        }.inObjectScope(.container)
+
+        container.register(PaymentSyncService.self) { r in
+            PaymentSyncService(
+                repository: r.resolve(PaymentRepositoryProtocol.self)!,
+                store: r.resolve(PendingTransactionStore.self)!
+            )
+        }.inObjectScope(.container)
+
+        container.register(PaymentAnalytics.self) { r in
+            r.resolve(AnalyticsManager.self)!
         }.inObjectScope(.container)
     }
 }

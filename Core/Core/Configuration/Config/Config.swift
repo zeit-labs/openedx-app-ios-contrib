@@ -35,6 +35,8 @@ public protocol ConfigProtocol: Sendable {
     var program: DiscoveryConfig { get }
     var experimentalFeatures: ExperimentalFeaturesConfig { get }
     var URIScheme: String { get }
+    var isPaymentsEnabled: Bool { get }
+    var appStoreSharedSecret: String? { get }
 }
 
 public enum TokenType: String, Sendable {
@@ -56,6 +58,8 @@ private enum ConfigKeys: String, Sendable {
     case appstoreID = "APP_STORE_ID"
     case faq = "FAQ_URL"
     case URIScheme = "URI_SCHEME"
+    case isPaymentsEnabled = "PAYMENTS_ENABLED"
+    case appStoreSharedSecret = "APP_STORE_SHARED_SECRET"
 }
 
 public class Config: @unchecked Sendable {
@@ -189,6 +193,14 @@ extension Config: ConfigProtocol {
     
     public var URIScheme: String {
         return string(for: ConfigKeys.URIScheme.rawValue) ?? ""
+    }
+    
+    public var isPaymentsEnabled: Bool {
+        return bool(for: ConfigKeys.isPaymentsEnabled.rawValue)
+    }
+    
+    public var appStoreSharedSecret: String? {
+        return string(for: ConfigKeys.appStoreSharedSecret.rawValue) ?? ""
     }
 }
 

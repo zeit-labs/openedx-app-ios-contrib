@@ -1,14 +1,18 @@
-API_HOST_URL: 'http://localhost:8000'
-SSO_URL: 'http://localhost:8000'
-SSO_FINISHED_URL:  'http://localhost:8000'
+API_HOST_URL: 'https://lab.zeitlabs.com'
+SSO_URL: 'https://lab.zeitlabs.com/auth/login/tpa-saml/?auth_entry=login&next=%2F%3Ftpa_hint%3Dsaml-dga-futurex-lms-sso&idp=dga-futurex-lms-sso"'
+SSO_FINISHED_URL:  "https://lab.zeitlabs.com/auth/login/tpa-saml/auth/complete/tpa-saml"
+
 ENVIRONMENT_DISPLAY_NAME: 'Localhost'
 FEEDBACK_EMAIL_ADDRESS: 'support@example.com'
-OAUTH_CLIENT_ID: ''
+OAUTH_CLIENT_ID: 'd4WVUNBYNrTjrTQqj6knKbaoYJX4q9fPXetNrZsV'
 
 SSO_BUTTON_TITLE:
     ar: "الدخول عبر SSO"
     en: "Sign in with SSO"
     
+PAYMENTS_ENABLED: false
+APP_STORE_SHARED_SECRET: "payment_secret"
+
 EXPERIMENTAL_FEATURES:
     APP_LEVEL_DOWNLOADS:
         ENABLED: false

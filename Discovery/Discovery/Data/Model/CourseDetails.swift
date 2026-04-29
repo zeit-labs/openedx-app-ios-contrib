@@ -7,6 +7,22 @@
 
 import Foundation
 
+public struct CourseMode: Codable, Sendable {
+    public let slug: String
+    public let name: String
+    public let price: Int
+    public let currency: String
+    public let iosSku: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case slug
+        case name
+        case price = "min_price"
+        case currency
+        case iosSku = "ios_sku"
+    }
+}
+
 public struct CourseDetails: Sendable {
     public let courseID: String
     public let org: String
@@ -21,6 +37,8 @@ public struct CourseDetails: Sendable {
     public let courseBannerURL: String
     public let courseVideoURL: String?
     public let courseRawImage: String?
+    public let iapProductID: String?
+    public let courseModes: [CourseMode]?
     
     public init(courseID: String,
                 org: String,
@@ -34,7 +52,9 @@ public struct CourseDetails: Sendable {
                 overviewHTML: String,
                 courseBannerURL: String,
                 courseVideoURL: String?,
-                courseRawImage: String?
+                courseRawImage: String?,
+                iapProductID: String?,
+                courseModes: [CourseMode]?
     ) {
         self.courseID = courseID
         self.org = org
@@ -49,5 +69,11 @@ public struct CourseDetails: Sendable {
         self.courseBannerURL = courseBannerURL
         self.courseVideoURL = courseVideoURL
         self.courseRawImage = courseRawImage
+        self.iapProductID = iapProductID
+        self.courseModes = courseModes
     }
+    
+    public var isUpgradeAvailable: Bool {
+            return iapProductID != nil && !iapProductID!.isEmpty
+        }
 }

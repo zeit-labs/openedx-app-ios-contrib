@@ -88,7 +88,9 @@ public final class DiscoveryPersistence: DiscoveryPersistenceProtocol {
                 overviewHTML: courseDetails.overviewHTML ?? "",
                 courseBannerURL: courseDetails.courseBannerURL ?? "",
                 courseVideoURL: nil,
-                courseRawImage: courseDetails.courseRawImage
+                courseRawImage: courseDetails.courseRawImage,
+                iapProductID: nil,
+                courseModes: []
             )
         }
     }

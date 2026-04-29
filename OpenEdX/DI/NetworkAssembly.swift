@@ -10,6 +10,7 @@ import Core
 import OEXFoundation
 import Alamofire
 import Swinject
+import Payment
 
 class NetworkAssembly: Assembly {
     func assemble(container: Container) {
@@ -40,6 +41,15 @@ class NetworkAssembly: Assembly {
         
         container.register(API.self) {r in
             API(session: r.resolve(Alamofire.Session.self)!, baseURL: r.resolve(ConfigProtocol.self)!.baseURL)
+        }.inObjectScope(.container)
+        
+        // MARK: Payment
+        container.register(PaymentRepositoryProtocol.self) { r in
+            PaymentRepository(
+                api: r.resolve(API.self)!,
+                config: r.resolve(ConfigProtocol.self)!,
+                store: r.resolve(PendingTransactionStore.self)!
+            )
         }.inObjectScope(.container)
     }
 }

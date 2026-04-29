@@ -18,6 +18,7 @@ import Profile
 import Course
 import Discussion
 @preconcurrency import Combine
+import Payment
 
 // swiftlint:disable function_body_length closure_parameter_position type_body_length
 class ScreenAssembly: Assembly {
@@ -330,7 +331,8 @@ class ScreenAssembly: Assembly {
                 config: r.resolve(ConfigProtocol.self)!,
                 cssInjector: r.resolve(CSSInjector.self)!,
                 connectivity: r.resolve(ConnectivityProtocol.self)!,
-                storage: r.resolve(CoreStorage.self)!
+                storage: r.resolve(CoreStorage.self)!,
+                container: container
             )
         }
         
@@ -695,6 +697,30 @@ class ScreenAssembly: Assembly {
                 router: r.resolve(DownloadsRouter.self)!,
                 storage: r.resolve(DownloadsStorage.self)!,
                 analytics: r.resolve(DownloadsAnalytics.self)!
+            )
+        }
+        
+        // MARK: Payment
+        container.register(CourseUpgradeViewModel.self) { @MainActor r, courseID, productID in
+            CourseUpgradeViewModel(
+                courseID: courseID,
+                productID: productID,
+                paymentService: r.resolve(PaymentServiceProtocol.self)!,
+                courseInteractor: r.resolve(CourseStructureManagerProtocol.self)!,
+                analytics: r.resolve(PaymentAnalytics.self)!
+            )
+        }
+        
+        container.register(CourseDetailsViewModel.self) { @MainActor r in
+            CourseDetailsViewModel(
+                interactor: r.resolve(DiscoveryInteractorProtocol.self)!,
+                router: r.resolve(DiscoveryRouter.self)!,
+                analytics: r.resolve(DiscoveryAnalytics.self)!,
+                config: r.resolve(ConfigProtocol.self)!,
+                cssInjector: r.resolve(CSSInjector.self)!,
+                connectivity: r.resolve(ConnectivityProtocol.self)!,
+                storage: r.resolve(CoreStorage.self)!,
+                container: container
             )
         }
     }

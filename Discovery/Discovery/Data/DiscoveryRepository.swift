@@ -98,7 +98,9 @@ final class DiscoveryRepositoryMock: DiscoveryRepositoryProtocol {
             overviewHTML: "<b>Course description</b><br><br>Lorem ipsum",
             courseBannerURL: "courseBannerURL",
             courseVideoURL: nil,
-            courseRawImage: nil
+            courseRawImage: nil,
+            iapProductID: nil,
+            courseModes: nil
         )
     }
     
@@ -116,7 +118,9 @@ final class DiscoveryRepositoryMock: DiscoveryRepositoryProtocol {
             overviewHTML: "<b>Course description</b><br><br>Lorem ipsum",
             courseBannerURL: "courseBannerURL",
             courseVideoURL: nil,
-            courseRawImage: nil
+            courseRawImage: nil,
+            iapProductID: nil,
+            courseModes: nil
         )
     }
     

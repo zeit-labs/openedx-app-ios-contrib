@@ -20,6 +20,20 @@
                ReferencedContainer = "container:OpenEdX.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "99916D822F9A17FA00623576"
+               BuildableName = "PaymentTests.xctest"
+               BlueprintName = "PaymentTests"
+               ReferencedContainer = "container:Payment/Payment.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction

@@ -15,6 +15,7 @@ import Course
 import Discussion
 import WhatsNew
 import Downloads
+import Payment
 import Swinject
 import OEXFoundation
 
@@ -29,6 +30,7 @@ class AnalyticsManager: AuthorizationAnalytics,
                         CoreAnalytics,
                         WhatsNewAnalytics,
                         DownloadsAnalytics,
+                        PaymentAnalytics,
                         @unchecked Sendable {
     
     private var services: [AnalyticsService]
@@ -1170,6 +1172,93 @@ class AnalyticsManager: AuthorizationAnalytics,
     
     public func downloadsScreenViewed() {
         trackScreenEvent(.downloadsScreenViewed, biValue: .downloadsScreenViewed)
+    }
+    
+    // MARK: Payment
+    func trackPaymentEvent(_ event: PaymentAnalyticsEvent) {
+        var properties: [String: Any] = [:]
+        let biValue: EventBIValue
+        
+        // We use .courseEnrollClicked/Success as the base AnalyticsEvent
+        // because IAP is essentially a course enrollment conversion.
+        var baseEvent: AnalyticsEvent = .courseEnrollClicked
+
+        switch event {
+        case .upgradeButtonTapped(let courseID, let productID):
+            biValue = .iapUpgradeClicked
+            properties = [
+                EventParamKey.courseID: courseID,
+                "product_id": productID
+            ]
+            
+        case .purchaseSuccess(let courseID, let productID, let transactionID):
+            biValue = .iapUpgradeSuccess
+            baseEvent = .courseEnrollSuccess
+            properties = [
+                EventParamKey.courseID: courseID,
+                "product_id": productID,
+                "transaction_id": String(transactionID)
+            ]
+            
+        case .purchaseFailed(let courseID, let productID, let error):
+            biValue = .iapUpgradeFailure
+            properties = [
+                EventParamKey.courseID: courseID,
+                "product_id": productID,
+                "error": error.localizedDescription
+            ]
+            
+        case .productLoadFailed(let courseID, let productID, let error):
+            biValue = .iapProductLoadFailure
+            properties = [
+                EventParamKey.courseID: courseID,
+                "product_id": productID,
+                "error": error.localizedDescription
+            ]
+            
+        case .validationFailed(let courseID, let productID, let error):
+            biValue = .iapValidationFailure
+            properties = [
+                EventParamKey.courseID: courseID,
+                "product_id": productID,
+                "error": error.localizedDescription
+            ]
+            
+        case .restoreTapped(let courseID):
+            biValue = .iapRestoreClicked
+            properties = [EventParamKey.courseID: courseID]
+            
+        case .purchaseRevoked(let productID, let transactionID):
+            biValue = .iapPaymentRevoked
+            properties = [
+                "product_id": productID,
+                "transaction_id": String(transactionID)
+            ]
+            
+        case .verificationFailed(let courseID, let error):
+            biValue = .iapUpgradeFailure
+            properties = [
+                EventParamKey.courseID: courseID,
+                "error": error.localizedDescription,
+                "type": "verification_failed"
+            ]
+            
+        case .purchaseCancelled(let courseID, let productID):
+            biValue = .iapUpgradeFailure
+            properties = [
+                EventParamKey.courseID: courseID,
+                "product_id": productID,
+                "type": "user_cancelled"
+            ]
+        @unknown default:
+            biValue = .iapUpgradeFailure
+            properties = [
+                "error": "Unknown payment event received"
+            ]
+        }
+
+        // Call your existing manager function that handles multi-service logging
+        trackEvent(baseEvent, biValue: biValue, parameters: properties)
     }
 }
 // swiftlint:enable type_body_length file_length

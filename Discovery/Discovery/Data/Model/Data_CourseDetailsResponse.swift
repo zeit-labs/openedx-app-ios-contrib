@@ -9,6 +9,34 @@ import Foundation
 import Core
 
 public extension DataLayer {
+    
+    // MARK: - CourseModeResponse
+    struct CourseModeResponse: Codable {
+        public let slug: String
+        public let name: String
+        public let price: Int
+        public let currency: String
+        public let iosSku: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case slug
+            case name
+            case price = "min_price"
+            case currency
+            case iosSku = "ios_sku"
+        }
+        
+        var domain: Discovery.CourseMode {
+            return Discovery.CourseMode(
+                slug: slug,
+                name: name,
+                price: price,
+                currency: currency,
+                iosSku: iosSku
+            )
+        }
+    }
+
     // MARK: - CourseDetailsResponse
     struct CourseDetailsResponse: Codable {
         public let blocksURL: String
@@ -32,6 +60,8 @@ public extension DataLayer {
         public let invitationOnly: Bool
         public let courseID: String
         public let overview: String
+        public let productId: String?
+        public let courseModes: [CourseModeResponse]?
         
         enum CodingKeys: String, CodingKey {
             case blocksURL = "blocks_url"
@@ -55,6 +85,8 @@ public extension DataLayer {
             case invitationOnly = "invitation_only"
             case courseID = "course_id"
             case overview
+            case productId = "ios_sku"
+            case courseModes = "course_modes"
         }
     }
 }
@@ -76,7 +108,9 @@ public extension DataLayer.CourseDetailsResponse {
             overviewHTML: overview,
             courseBannerURL: imageURL,
             courseVideoURL: media.courseVideo?.url,
-            courseRawImage: media.image?.raw
+            courseRawImage: media.image?.raw,
+            iapProductID: productId,
+            courseModes: courseModes?.map { $0.domain } ?? []
         )
     }
 }

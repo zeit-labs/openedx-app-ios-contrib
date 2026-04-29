@@ -19,6 +19,7 @@ import FirebaseCore
 import FirebaseMessaging
 import Theme
 import BackgroundTasks
+import Payment
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -43,7 +44,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         initDI()
         initPlugins()
         
-        // Reset the value to false to get the actual status from the API
+        // Start Payment Sync Service (Checks for interrupted purchases)
+        if let syncService = Container.shared.resolve(PaymentSyncService.self) {
+            syncService.start()
+        }
+        
+        // Reset the value to false to get the actual status from the AP
         if var storage = Container.shared.resolve(CoreStorage.self) {
             storage.updateAppRequired = false
         }
@@ -95,9 +101,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             object: nil
         )
 
+        registerBackgroundTask()
+        
         return true
     }
 
+    // Handle App termination to stop the Payment listener Task
+    func applicationWillTerminate(_ application: UIApplication) {
+        if let syncService = Container.shared.resolve(PaymentSyncService.self) {
+            syncService.stop()
+        }
+    }
+
+    // Social Login and Deep Link URL Handling
     func application(
         _ app: UIApplication,
         open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]

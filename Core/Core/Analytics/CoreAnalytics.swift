@@ -283,6 +283,13 @@ public enum EventBIValue: String {
     case downloadError = "edx.bi.app.downloads.download_error"
     case downloadCompleted = "edx.bi.app.downloads.download_completed"
     case downloadStarted = "edx.bi.app.downloads.download_started"
+    case iapUpgradeClicked = "edx.bi.app.iap.upgrade.clicked"
+    case iapUpgradeSuccess = "edx.bi.app.iap.upgrade.success"
+    case iapUpgradeFailure = "edx.bi.app.iap.upgrade.failure"
+    case iapProductLoadFailure = "edx.bi.app.iap.product.load.failure"
+    case iapValidationFailure = "edx.bi.app.iap.validation.failure"
+    case iapRestoreClicked = "edx.bi.app.iap.restore.clicked"
+    case iapPaymentRevoked = "edx.bi.app.iap.payment.revoked"
 }
 
 public struct EventParamKey {

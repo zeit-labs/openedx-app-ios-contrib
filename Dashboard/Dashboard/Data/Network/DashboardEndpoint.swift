@@ -21,7 +21,7 @@ enum DashboardEndpoint: EndPointType {
         case let .getEnrollments(username, _):
             return "/api/mobile/v3/users/\(username)/course_enrollments"
         case let .getPrimaryEnrollment(username, _):
-            return "/api/mobile/v4/users/\(username)/course_enrollments"
+            return "/api/mobile/v1/users/\(username)/course_enrollments"
         case let .getAllCourses(username, _, _):
             return "/api/mobile/v4/users/\(username)/course_enrollments"
         }

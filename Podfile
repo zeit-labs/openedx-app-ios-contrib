@@ -94,6 +94,15 @@ abstract_target "App" do
     end
   end
   
+	
+  target "Payment" do
+      project './Payment/Payment.xcodeproj'
+      workspace './Payment/Payment.xcodeproj'
+      target 'PaymentTests' do
+        pod 'SwiftyMocky', :git => 'https://github.com/MakeAWishFoundation/SwiftyMocky.git', :tag => '4.2.0'
+      end
+    end
+
   target "Theme" do
     project './Theme/Theme.xcodeproj'
     workspace './Theme/Theme.xcodeproj'
