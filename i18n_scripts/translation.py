@@ -129,8 +129,11 @@ def get_modules_to_translate(modules_dir: Path):
             )
         ]
         return modules_list
-    except Exception as e:
-        print(f"Error retrieving modules: {e}", file=sys.stderr)
+    except FileNotFoundError as e:
+        print(f"Directory not found: {e}", file=sys.stderr)
+        raise
+    except PermissionError as e:
+        print(f"Permission denied: {e}", file=sys.stderr)
         raise
 
 
@@ -200,8 +203,11 @@ def get_languages_dirs(modules_dir: Path):
         if "en.lproj" not in languages_dirs:
             languages_dirs.append("en.lproj")
         return languages_dirs
-    except Exception as e:
-        print(f"Error finding language directories: {e}", file=sys.stderr)
+    except FileNotFoundError as e:
+        print(f"Directory not found: {e}", file=sys.stderr)
+        raise
+    except PermissionError as e:
+        print(f"Permission denied: {e}", file=sys.stderr)
         raise
 
 
@@ -299,7 +305,7 @@ def write_translations_to_modules(modules_dir: Path, lang_dir, modules_translati
                         write_line_and_comment(f, entry)
 
         except Exception as e:
-            print(f"Error writing to module {module}: {e}", file=sys.stderr)
+            print(f"Error writing translations to file.\n Module: {module}\n Error: {e}", file=sys.stderr)
             raise
 
 
@@ -440,13 +446,13 @@ def add_translation_files_to_xcode(modules_dir: Path = None):
             main_project.save()
             
     except Exception as e:
-        print(f"Error adding to XCode: {e}", file=sys.stderr)
+        print(f"Error: An unexpected error occurred in add_translation_files_to_xcode: {e}", file=sys.stderr)
         raise
 
 
 def clean_translation_files(modules_dir: Path = None):
     """
-    Remove translation files from the file system.
+    Remove all non-English localizable files from the XCode project.
 
     :param xcode_project: XcodeProject
     :return:
@@ -460,7 +466,7 @@ def clean_translation_files(modules_dir: Path = None):
                 path.unlink()
             xcode_project.save()
     except Exception as e:
-        print(f"Error cleaning files: {e}", file=sys.stderr)
+        print(f"Error: An unexpected error occurred in clean_translation_files: {e}", file=sys.stderr)
         raise
 
 
