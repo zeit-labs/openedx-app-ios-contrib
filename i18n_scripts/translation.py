@@ -215,7 +215,9 @@ def get_translations_from_file(modules_dir, lang_dir):
         lang_dir (str): The directory containing the translation file being split.
 
     Returns:
-        dict: A dictionary containing translations split by module.
+        dict: A dictionary containing translations split by module. The keys are module names,
+              and the values are lists of dictionaries, each containing the 'key', 'value', and 'comment'
+              for each translation entry within the module.
     """
     translations = defaultdict(list)
     try:
@@ -254,6 +256,9 @@ def write_translations_to_modules(modules_dir: Path, lang_dir, modules_translati
         modules_dir (str): The directory containing all the modules.
         lang_dir (str): The directory of the translation file being written.
         modules_translations (dict): A dictionary containing translations for each module.
+
+    Returns:
+        None
     """
     all_modules = set(get_modules_to_translate(modules_dir))
     all_modules.add(MAIN_MODULE_NAME)
@@ -313,6 +318,9 @@ def write_line_and_comment(f, entry):
     Args:
         f (file object): The file object to write to.
         entry (dict): A dictionary containing the translation entry with 'key', 'value', and optional 'comment'.
+
+    Returns:
+        None
     """
     comment = entry.get('comment')  # Retrieve the comment, if present
     if comment:
@@ -352,9 +360,11 @@ def get_project_path(modules_dir: Path, module_name: str) -> Path:
     :return: Path
     """
     if module_name == MAIN_MODULE_NAME:
-        return modules_dir / f'{module_name}.xcodeproj/project.pbxproj'
-    return modules_dir / module_name / f'{module_name}.xcodeproj/project.pbxproj'
+        project_file_path = modules_dir / f'{module_name}.xcodeproj/project.pbxproj'
+    else:
+        project_file_path = modules_dir / module_name / f'{module_name}.xcodeproj/project.pbxproj'
 
+    return project_file_path
 
 def get_xcode_projects(modules_dir: Path):
     """
