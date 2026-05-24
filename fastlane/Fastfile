@@ -21,6 +21,7 @@ before_all do
 
   ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "180"
   ENV["FASTLANE_XCODE_LIST_TIMEOUT"] = "180"
+  ENV["FASTLANE_SIMULATOR_BOOT_TIMEOUT"] = "200"
 end
 
 lane :linting do
@@ -37,8 +38,8 @@ end
 lane :unit_tests do
   run_tests(
     workspace: "OpenEdX.xcworkspace",
-    device: "iPhone 16",
+    device: "iPhone 16 Pro",
     scheme: "OpenEdXDev",
-    xcargs: "-skipPackagePluginValidation -skipMacroValidation" # Ignore swiftLint plugin validation
+    xcargs: "-skipPackagePluginValidation -skipMacroValidation -destination 'platform=iOS Simulator,name=iPhone 16 Pro,OS=latest'" # Ignore swiftLint plugin validation
   )
 end
