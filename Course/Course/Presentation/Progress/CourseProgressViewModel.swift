@@ -11,32 +11,31 @@ import Foundation
 import Theme
 
 @MainActor
-public class CourseProgressViewModel: ObservableObject {
+@Observable
+public class CourseProgressViewModel {
     
-    @Published var courseProgress: CourseProgressDetails?
-    @Published var assignmentProgressData: [String: AssignmentProgressData] = [:]
-    @Published var isLoading: Bool = false
-    @Published var isShowRefresh = false
-    @Published var showError: Bool = false
-    
+    var courseProgress: CourseProgressDetails?
+    var assignmentProgressData: [String: AssignmentProgressData] = [:]
+    var isLoading: Bool = false
+    var isShowRefresh = false
+
     let router: CourseRouter
     let analytics: CourseAnalytics
     let connectivity: ConnectivityProtocol
     let interactor: CourseInteractorProtocol
-    
-    public var errorMessage: String? {
-        didSet {
-            withAnimation {
-                showError = errorMessage != nil
-            }
-        }
+    var courseStructure: CourseStructure?
+
+    public var errorMessage: String?
+
+    public var showError: Bool {
+        errorMessage != nil
     }
     
     public init(
         interactor: CourseInteractorProtocol,
         router: CourseRouter,
         analytics: CourseAnalytics,
-        connectivity: ConnectivityProtocol
+        connectivity: ConnectivityProtocol,
     ) {
         self.interactor = interactor
         self.router = router
@@ -53,7 +52,7 @@ public class CourseProgressViewModel: ObservableObject {
             } else {
                 courseProgress = try await interactor.getCourseProgressOffline(courseID: courseID)
             }
-            
+
             // Update assignment progress data
             assignmentProgressData = getAllAssignmentProgressData()
             
@@ -127,8 +126,12 @@ public class CourseProgressViewModel: ObservableObject {
         courseProgress?.gradingPolicy.assignmentPolicies ?? []
     }
     
-    public func getAssignmentProgress(for assignmentType: String) -> AssignmentProgressData {
-        guard let courseProgress = courseProgress else {
+    public func getAssignmentProgress(
+        for assignmentType: String,
+        courseStructure: CourseStructure?
+    ) -> AssignmentProgressData {
+
+        guard let courseProgress = courseProgress, let courseStructure = courseStructure else {
             return AssignmentProgressData(
                 completed: 0,
                 total: 0,
@@ -137,32 +140,40 @@ public class CourseProgressViewModel: ObservableObject {
                 percentGraded: 0.0
             )
         }
-        
-        return courseProgress.getAssignmentProgress(for: assignmentType)
+
+        var completed = 0
+        var total = 0
+
+        for chapter in courseStructure.childs {
+            for sequential in chapter.childs where sequential.sequentialProgress?.assignmentType == assignmentType {
+                total += 1
+                if sequential.completion == 1 {
+                    completed += 1
+                }
+            }
+        }
+
+        return courseProgress.getAssignmentProgress(for: assignmentType, completedCount: completed, total: total)
     }
-    
+
     public func getAssignmentColor(for index: Int) -> Color {
-        guard let courseProgress = courseProgress else {
-            return Theme.Colors.textSecondary
-        }
+        let hexColor = courseProgress?.gradingPolicy.assignmentColorHex(for: index)
+            ?? CourseProgressGradingPolicy.assignmentColorHex(for: index, in: [])
         
-        if courseProgress.gradingPolicy.assignmentColors.isEmpty {
-            return Theme.Colors.accentColor
-        }
+        let fallbackHexColor = CourseProgressGradingPolicy.assignmentColorHex(for: index, in: [])
         
-        let colorIndex = index % courseProgress.gradingPolicy.assignmentColors.count
-        let hexColor = courseProgress.gradingPolicy.assignmentColors[colorIndex]
-        
-        return Color(hex: hexColor) ?? Theme.Colors.accentColor
+        return Color(hex: hexColor)
+            ?? Color(hex: fallbackHexColor)
+            ?? Theme.Colors.assignmentColor
     }
     
     public func getAllAssignmentProgressData() -> [String: AssignmentProgressData] {
-        guard let courseProgress = courseProgress else { return [:] }
+        guard let courseProgress = courseProgress, let courseStructure else { return [:] }
         
         var progressData: [String: AssignmentProgressData] = [:]
         
         for policy in courseProgress.gradingPolicy.assignmentPolicies {
-            let data = getAssignmentProgress(for: policy.type)
+            let data = getAssignmentProgress(for: policy.type, courseStructure: courseStructure)
             progressData[policy.type] = data
         }
         

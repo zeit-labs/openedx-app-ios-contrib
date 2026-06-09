@@ -2,10 +2,11 @@
 //  CourseProgressDetails.swift
 //  Course
 //
-//  Created by Ivan Stepanok on 19.06.2025.
+//  Created by Ivan Stepanok on 08.07.2025.
 //
 
 import Foundation
+import Core
 
 // MARK: - CourseProgressDetails
 public struct CourseProgressDetails: Sendable {
@@ -49,7 +50,35 @@ public struct CourseProgressDetails: Sendable {
         self.sectionScores = sectionScores
         self.verificationData = verificationData
     }
-    
+
+    public func getAssignmentProgress(
+        for assignmentType: String,
+        completedCount: Int,
+        total: Int
+    ) -> AssignmentProgressData {
+
+        let assignments = self.sectionScores.flatMap { $0.subsections }
+            .filter { $0.assignmentType == assignmentType && $0.hasGradedAssignment }
+
+        let completedProblems = completedCount
+        let totalProblems = total
+
+        let earnedPoints = assignments.reduce(0.0) { $0 + $1.numPointsEarned }
+        let possiblePoints = assignments.reduce(0.0) { $0 + $1.numPointsPossible }
+
+        // Calculate average percent_graded for this assignment type (from server data)
+        let totalPercentGraded = assignments.reduce(0.0) { $0 + $1.percentGraded }
+        let averagePercentGraded = assignments.isEmpty ? 0.0 : totalPercentGraded / Double(assignments.count)
+
+        return AssignmentProgressData(
+            completed: completedProblems,
+            total: totalProblems,
+            earnedPoints: earnedPoints,
+            possiblePoints: possiblePoints,
+            percentGraded: averagePercentGraded
+        )
+    }
+
     public func getAssignmentProgress(for assignmentType: String) -> AssignmentProgressData {
         guard let policy = self.gradingPolicy.assignmentPolicies
             .first(where: { $0.type == assignmentType }) else {
@@ -67,11 +96,11 @@ public struct CourseProgressDetails: Sendable {
         
         // Calculate completed and total based on problem scores
         var completedProblems = 0
-        var totalProblems = 0
-        
+        var totalProblems = assignments.count
+
         for assignment in assignments {
             // Count problems in this assignment
-            totalProblems += assignment.problemScores.count
+//            totalProblems += assignment.count
             
             // Count completed problems (where earned > 0)
             completedProblems += assignment.problemScores.filter { $0.earned > 0 }.count
@@ -180,6 +209,18 @@ public struct CourseProgressGrade: Sendable {
 }
 
 public struct CourseProgressGradingPolicy: Sendable {
+    public static let defaultAssignmentColors = [
+        "#D24242",
+        "#7B9645",
+        "#5A5AD8",
+        "#B0842C",
+        "#2E90C2",
+        "#D13F88",
+        "#36A17D",
+        "#AE5AD8",
+        "#3BA03B"
+    ]
+
     public let assignmentPolicies: [CourseProgressAssignmentPolicy]
     public let gradeRange: [String: Double]
     public let assignmentColors: [String]
@@ -191,7 +232,24 @@ public struct CourseProgressGradingPolicy: Sendable {
     ) {
         self.assignmentPolicies = assignmentPolicies
         self.gradeRange = gradeRange
-        self.assignmentColors = assignmentColors
+        self.assignmentColors = Self.normalizedAssignmentColors(assignmentColors)
+    }
+
+    public static func normalizedAssignmentColors(_ assignmentColors: [String]?) -> [String] {
+        guard let assignmentColors, !assignmentColors.isEmpty else {
+            return defaultAssignmentColors
+        }
+        return assignmentColors
+    }
+
+    public static func assignmentColorHex(for index: Int, in assignmentColors: [String]) -> String {
+        let colors = assignmentColors.isEmpty ? defaultAssignmentColors : assignmentColors
+        let colorIndex = max(0, index) % colors.count
+        return colors[colorIndex]
+    }
+
+    public func assignmentColorHex(for index: Int) -> String {
+        Self.assignmentColorHex(for: index, in: assignmentColors)
     }
 }
 
@@ -234,7 +292,14 @@ public struct CourseProgressSectionScore: Sendable {
     }
 }
 
-public struct CourseProgressSubsection: Sendable {
+public struct CourseProgressSubsection: Sendable, Equatable {
+    public static func == (lhs: CourseProgressSubsection, rhs: CourseProgressSubsection) -> Bool {
+        lhs.assignmentType == rhs.assignmentType &&
+        lhs.blockKey == rhs.blockKey &&
+        lhs.displayName == rhs.displayName &&
+        lhs.url == rhs.url
+    }
+
     public let assignmentType: String?
     public let blockKey: String
     public let displayName: String
@@ -248,6 +313,7 @@ public struct CourseProgressSubsection: Sendable {
     public let showCorrectness: String
     public let showGrades: Bool
     public let url: String
+    public let shortLabel: String?
     
     public var progress: Double {
         guard numPointsPossible > 0 else { return 0.0 }
@@ -267,7 +333,8 @@ public struct CourseProgressSubsection: Sendable {
         problemScores: [CourseProgressProblemScore],
         showCorrectness: String,
         showGrades: Bool,
-        url: String
+        url: String,
+        shortLabel: String? = nil
     ) {
         self.assignmentType = assignmentType
         self.blockKey = blockKey
@@ -282,6 +349,7 @@ public struct CourseProgressSubsection: Sendable {
         self.showCorrectness = showCorrectness
         self.showGrades = showGrades
         self.url = url
+        self.shortLabel = shortLabel
     }
 }
 

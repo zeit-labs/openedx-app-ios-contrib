@@ -48,6 +48,7 @@ public enum ThemeAssets {
   public static let secondaryHeaderColor = ColorAsset(name: "secondaryHeaderColor")
   public static let courseProgressBG = ColorAsset(name: "CourseProgressBG")
   public static let deleteAccountBG = ColorAsset(name: "DeleteAccountBG")
+  public static let emptyStateIconColor = ColorAsset(name: "EmptyStateIconColor")
   public static let infoColor = ColorAsset(name: "InfoColor")
   public static let irreversibleAlert = ColorAsset(name: "IrreversibleAlert")
   public static let loginBackground = ColorAsset(name: "LoginBackground")
@@ -65,6 +66,7 @@ public enum ThemeAssets {
   public static let secondaryButtonBGColor = ColorAsset(name: "SecondaryButtonBGColor")
   public static let secondaryButtonBorderColor = ColorAsset(name: "SecondaryButtonBorderColor")
   public static let secondaryButtonTextColor = ColorAsset(name: "SecondaryButtonTextColor")
+  public static let secondaryContentColor = ColorAsset(name: "SecondaryContentColor")
   public static let shadowColor = ColorAsset(name: "ShadowColor")
   public static let slidingSelectedTextColor = ColorAsset(name: "slidingSelectedTextColor")
   public static let slidingStrokeColor = ColorAsset(name: "slidingStrokeColor")
@@ -83,7 +85,9 @@ public enum ThemeAssets {
   public static let tabbarInactiveColor = ColorAsset(name: "TabbarInactiveColor")
   public static let textPrimary = ColorAsset(name: "TextPrimary")
   public static let textSecondary = ColorAsset(name: "TextSecondary")
+  public static let textSecondaryDark = ColorAsset(name: "TextSecondaryDark")
   public static let textSecondaryLight = ColorAsset(name: "TextSecondaryLight")
+  public static let textTertiary = ColorAsset(name: "TextTertiary")
   public static let textInputBackground = ColorAsset(name: "TextInputBackground")
   public static let textInputPlaceholderColor = ColorAsset(name: "TextInputPlaceholderColor")
   public static let textInputStroke = ColorAsset(name: "TextInputStroke")
@@ -100,6 +104,7 @@ public enum ThemeAssets {
   public static let warningText = ColorAsset(name: "warningText")
   public static let white = ColorAsset(name: "white")
   public static let appLogo = ImageAsset(name: "appLogo")
+  public static let assignmentStroke = ColorAsset(name: "assignmentStroke")
   public static let headerBackground = ImageAsset(name: "headerBackground")
 }
 // swiftlint:enable identifier_name line_length nesting type_body_length type_name

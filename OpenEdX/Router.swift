@@ -19,6 +19,7 @@ import Downloads
 import Profile
 import WhatsNew
 import Combine
+import AppDates
 
 // swiftlint:disable type_body_length file_length
 public class Router: AuthorizationRouter,
@@ -29,7 +30,8 @@ public class Router: AuthorizationRouter,
                      DashboardRouter,
                      CourseRouter,
                      DiscussionRouter,
-                     BackNavigationProtocol {
+                     BackNavigationProtocol,
+                     AppDatesRouter {
 
     public var container: Container
 
@@ -321,7 +323,7 @@ public class Router: AuthorizationRouter,
     }
     
     public func showDiscussionsSearch(courseID: String, isBlackedOut: Bool) {
-        let viewModel = Container.shared.resolve(DiscussionSearchTopicsViewModel<RunLoop>.self, argument: courseID)!
+        let viewModel = Container.shared.resolve(DiscussionSearchTopicsViewModel.self, argument: courseID)!
 
         let view = DiscussionSearchTopicsView(viewModel: viewModel)
         
@@ -483,7 +485,9 @@ public class Router: AuthorizationRouter,
         verticalIndex: Int,
         chapters: [CourseChapter],
         chapterIndex: Int,
-        sequentialIndex: Int
+        sequentialIndex: Int,
+        showVideoNavigation: Bool = false,
+        courseVideoStructure: CourseStructure? = nil
     ) {
         let controller = getUnitController(
             courseName: courseName,
@@ -492,7 +496,9 @@ public class Router: AuthorizationRouter,
             verticalIndex: verticalIndex,
             chapters: chapters,
             chapterIndex: chapterIndex,
-            sequentialIndex: sequentialIndex
+            sequentialIndex: sequentialIndex,
+            showVideoNavigation: showVideoNavigation,
+            courseVideoStructure: courseVideoStructure
         )
         navigationController.pushViewController(controller, animated: true)
     }
@@ -504,7 +510,9 @@ public class Router: AuthorizationRouter,
         verticalIndex: Int,
         chapters: [CourseChapter],
         chapterIndex: Int,
-        sequentialIndex: Int
+        sequentialIndex: Int,
+        showVideoNavigation: Bool = false,
+        courseVideoStructure: CourseStructure? = nil
     ) -> UIHostingController<CourseUnitView> {
         let viewModel = Container.shared.resolve(
             CourseUnitViewModel.self,
@@ -514,14 +522,17 @@ public class Router: AuthorizationRouter,
             chapters,
             chapterIndex,
             sequentialIndex,
-            verticalIndex
+            verticalIndex,
+            showVideoNavigation,
+            courseVideoStructure
         )!
         
         let config = Container.shared.resolve(ConfigProtocol.self)
         let isDropdownActive = config?.uiComponents.courseDropDownNavigationEnabled ?? false
 
         let view = CourseUnitView(viewModel: viewModel, isDropdownActive: isDropdownActive)
-        return UIHostingController(rootView: view)
+        let controller = UIHostingController(rootView: view)
+        return controller
     }
     
     public func showCourseComponent(
@@ -603,9 +614,10 @@ public class Router: AuthorizationRouter,
         chapters: [CourseChapter],
         chapterIndex: Int,
         sequentialIndex: Int,
-        animated: Bool
+        animated: Bool,
+        showVideoNavigation: Bool,
+        courseVideoStructure: CourseStructure?
     ) {
-
         let controllerUnit = getUnitController(
             courseName: courseName,
             blockId: blockId,
@@ -613,14 +625,18 @@ public class Router: AuthorizationRouter,
             verticalIndex: verticalIndex,
             chapters: chapters,
             chapterIndex: chapterIndex,
-            sequentialIndex: sequentialIndex
+            sequentialIndex: sequentialIndex,
+            showVideoNavigation: showVideoNavigation,
+            courseVideoStructure: courseVideoStructure
         )
         
         var controllers = navigationController.viewControllers
         let config = Container.shared.resolve(ConfigProtocol.self)!
         let courseDropDownNavigationEnabled = config.uiComponents.courseDropDownNavigationEnabled
 
-        if courseDropDownNavigationEnabled || currentCourseTabSelection == CourseTab.dates.rawValue {
+        if courseDropDownNavigationEnabled
+            || currentCourseTabSelection == CourseTab.dates.rawValue
+            || showVideoNavigation {
             controllers.removeLast(1)
             controllers.append(contentsOf: [controllerUnit])
         } else {

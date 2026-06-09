@@ -9,6 +9,7 @@ import Foundation
 import Core
 import OEXFoundation
 
+/// @mockable
 public protocol CourseRepositoryProtocol: Sendable {
     func getCourseBlocks(courseID: String) async throws -> CourseStructure
     func getLoadedCourseBlocks(courseID: String) async throws -> CourseStructure
@@ -21,6 +22,8 @@ public protocol CourseRepositoryProtocol: Sendable {
     func getCourseDatesOffline(courseID: String) async throws -> CourseDates
     func getCourseDeadlineInfo(courseID: String) async throws -> CourseDateBanner
     func shiftDueDates(courseID: String) async throws
+    func updateLocalVideoProgress(blockID: String, progress: Double) async
+    func loadLocalVideoProgress(blockID: String) async -> Double?
     func getCourseProgress(courseID: String) async throws -> CourseProgressDetails
     func getCourseProgressOffline(courseID: String) async throws -> CourseProgressDetails
 }
@@ -197,7 +200,8 @@ public actor CourseRepository: CourseRepositoryProtocol {
             sequentialProgress: SequentialProgress(
                 assignmentType: sequential.assignmentProgress?.assignmentType,
                 numPointsEarned: Int(sequential.assignmentProgress?.numPointsEarned ?? 0),
-                numPointsPossible: Int(sequential.assignmentProgress?.numPointsPossible ?? 0)
+                numPointsPossible: Int(sequential.assignmentProgress?.numPointsPossible ?? 0),
+                shortLabel: sequential.assignmentProgress?.shortLabel
             ),
             due: sequential.due == nil ? nil : Date(iso8601: sequential.due!)
         )
@@ -304,6 +308,15 @@ public actor CourseRepository: CourseRepositoryProtocol {
             type: type
         )
     }
+    
+    public func updateLocalVideoProgress(blockID: String, progress: Double) async {
+        await persistence.updateLocalVideoProgress(blockID: blockID, progress: progress)
+    }
+    
+    public func loadLocalVideoProgress(blockID: String) async -> Double? {
+        let progress = await persistence.loadLocalVideoProgress(blockID: blockID)
+        return progress
+    }
 }
 
 // Mark - For testing and SwiftUI preview
@@ -311,6 +324,10 @@ public actor CourseRepository: CourseRepositoryProtocol {
 #if DEBUG
 @MainActor
 class CourseRepositoryMock: CourseRepositoryProtocol {
+    func updateLocalVideoProgress(blockID: String, progress: Double) async {}
+
+    func loadLocalVideoProgress(blockID: String) async -> Double? {nil}
+
     func getCourseDatesOffline(courseID: String) async throws -> CourseDates {
         throw NoCachedDataError()
     }
@@ -394,7 +411,8 @@ class CourseRepositoryMock: CourseRepositoryProtocol {
                             ],
                             showCorrectness: "always",
                             showGrades: true,
-                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week1/hw1"
+                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week1/hw1",
+                            shortLabel: nil
                         ),
                         CourseProgressSubsection(
                             assignmentType: "Lab",
@@ -411,7 +429,8 @@ class CourseRepositoryMock: CourseRepositoryProtocol {
                             ],
                             showCorrectness: "always",
                             showGrades: true,
-                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week1/lab1"
+                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week1/lab1",
+                            shortLabel: nil
                         )
                     ]
                 ),
@@ -436,7 +455,8 @@ class CourseRepositoryMock: CourseRepositoryProtocol {
                             ],
                             showCorrectness: "always",
                             showGrades: true,
-                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week2/hw2"
+                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week2/hw2",
+                            shortLabel: nil
                         ),
                         CourseProgressSubsection(
                             assignmentType: "Quiz",
@@ -455,7 +475,8 @@ class CourseRepositoryMock: CourseRepositoryProtocol {
                             ],
                             showCorrectness: "always",
                             showGrades: true,
-                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week2/quiz1"
+                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week2/quiz1",
+                            shortLabel: nil
                         )
                     ]
                 ),
@@ -481,7 +502,8 @@ class CourseRepositoryMock: CourseRepositoryProtocol {
                             ],
                             showCorrectness: "always",
                             showGrades: true,
-                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week3/hw3"
+                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week3/hw3",
+                            shortLabel: nil
                         )
                     ]
                 ),
@@ -501,7 +523,8 @@ class CourseRepositoryMock: CourseRepositoryProtocol {
                             problemScores: [],
                             showCorrectness: "always",
                             showGrades: true,
-                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week4/hw4"
+                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week4/hw4",
+                            shortLabel: nil
                         ),
                         CourseProgressSubsection(
                             assignmentType: "Lab",
@@ -516,7 +539,8 @@ class CourseRepositoryMock: CourseRepositoryProtocol {
                             problemScores: [],
                             showCorrectness: "always",
                             showGrades: false,
-                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week4/lab4"
+                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/week4/lab4",
+                            shortLabel: nil
                         )
                     ]
                 ),
@@ -542,7 +566,8 @@ class CourseRepositoryMock: CourseRepositoryProtocol {
                             ],
                             showCorrectness: "past_due",
                             showGrades: true,
-                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/midterm/exam"
+                            url: "/courses/course-v1:MITx+6.00.1x+2024_Summer/courseware/midterm/exam",
+                            shortLabel: nil
                         )
                     ]
                 )
@@ -558,7 +583,6 @@ class CourseRepositoryMock: CourseRepositoryProtocol {
     func getCourseProgressOffline(courseID: String) async throws -> CourseProgressDetails {
         throw NoCachedDataError()
     }
-    
     func resumeBlock(courseID: String) async throws -> ResumeBlock {
         ResumeBlock(blockID: "123")
     }
@@ -703,7 +727,8 @@ And there are various ways of describing it-- call it oral poetry or
             sequentialProgress: SequentialProgress(
                 assignmentType: sequential.assignmentProgress?.assignmentType,
                 numPointsEarned: Int(sequential.assignmentProgress?.numPointsEarned ?? 0),
-                numPointsPossible: Int(sequential.assignmentProgress?.numPointsPossible ?? 0)
+                numPointsPossible: Int(sequential.assignmentProgress?.numPointsPossible ?? 0),
+                shortLabel: sequential.assignmentProgress?.shortLabel
             ),
             due: sequential.due == nil ? nil : Date(iso8601: sequential.due!)
         )

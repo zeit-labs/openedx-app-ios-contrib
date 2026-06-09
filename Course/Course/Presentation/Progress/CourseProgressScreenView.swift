@@ -17,8 +17,9 @@ struct CourseProgressScreenView: View {
     @Binding private var collapsed: Bool
     @Binding private var viewHeight: CGFloat
     
-    @StateObject
-    private var viewModel: CourseProgressViewModel
+    @Bindable private var viewModel: CourseProgressViewModel
+    
+    private let initialCourseStructure: CourseStructure?
     
     private let connectivity: ConnectivityProtocol
     
@@ -28,14 +29,16 @@ struct CourseProgressScreenView: View {
         collapsed: Binding<Bool>,
         viewHeight: Binding<CGFloat>,
         viewModel: CourseProgressViewModel,
-        connectivity: ConnectivityProtocol
+        connectivity: ConnectivityProtocol,
+        courseStructure: CourseStructure?
     ) {
         self.courseID = courseID
         self._coordinate = coordinate
         self._collapsed = collapsed
         self._viewHeight = viewHeight
-        self._viewModel = StateObject(wrappedValue: { viewModel }())
+        self.viewModel =  viewModel
         self.connectivity = connectivity
+        self.initialCourseStructure = courseStructure
     }
     
     public var body: some View {
@@ -52,7 +55,7 @@ struct CourseProgressScreenView: View {
                         }
                     } else {
                         ScrollView {
-                            VStack(alignment: .center, spacing: 20) {
+                            VStack(alignment: .center) {
                                 DynamicOffsetView(
                                     coordinate: $coordinate,
                                     collapsed: $collapsed,
@@ -109,6 +112,9 @@ struct CourseProgressScreenView: View {
                     .ignoresSafeArea()
             )
             .onFirstAppear {
+                if viewModel.courseStructure == nil {
+                    viewModel.courseStructure = initialCourseStructure
+                }
                 Task {
                     await viewModel.getCourseProgress(courseID: courseID)
                 }
@@ -118,10 +124,10 @@ struct CourseProgressScreenView: View {
     
     @ViewBuilder
     private var courseProgressContent: some View {
-        VStack(alignment: .leading, spacing: 32) {
+        VStack(alignment: .leading, spacing: 16) {
             if viewModel.courseProgress != nil {
                 // Course Completion Header Section
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 0) {
                     HStack(alignment: .top, spacing: 16) {
                         VStack(alignment: .leading, spacing: 8) {
                             Text(CourseLocalization.CourseContainer.Progress.title)
@@ -151,7 +157,7 @@ struct CourseProgressScreenView: View {
                         .accessibilityAddTraits(.updatesFrequently)
                     }
                 }
-                .padding(.top, 16)
+//                .padding(.top, 16)
                 
                 // Check if course has graded assignments
                 if viewModel.hasGradedAssignments {
@@ -180,7 +186,7 @@ struct CourseProgressScreenView: View {
                     VStack(spacing: 16) {
                         Image(systemName: "doc.text")
                             .font(.system(size: 48))
-                            .foregroundColor(Theme.Colors.textSecondary)
+                            .foregroundColor(Theme.Colors.emptyStateIconColor)
                         
                         Text(CourseLocalization.CourseContainer.Progress.noGradedAssignments)
                             .font(Theme.Fonts.titleMedium)
@@ -227,7 +233,7 @@ struct CourseProgressScreenView: View {
         interactor: CourseInteractor.mock,
         router: CourseRouterMock(),
         analytics: CourseAnalyticsMock(),
-        connectivity: Connectivity()
+        connectivity: Connectivity(config: ConfigMock())
     )
     
     CourseProgressScreenView(
@@ -236,7 +242,8 @@ struct CourseProgressScreenView: View {
         collapsed: .constant(false),
         viewHeight: .constant(0),
         viewModel: vm,
-        connectivity: Connectivity()
+        connectivity: Connectivity(config: ConfigMock()),
+        courseStructure: nil
     )
     .loadFonts()
 }

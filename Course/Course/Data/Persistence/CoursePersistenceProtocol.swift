@@ -8,6 +8,7 @@
 import CoreData
 import Core
 
+/// @mockable
 public protocol CoursePersistenceProtocol: Sendable {
     func loadEnrollments() async throws -> [Core.CourseItem]
     func saveEnrollments(items: [Core.CourseItem]) async
@@ -19,6 +20,8 @@ public protocol CoursePersistenceProtocol: Sendable {
     func loadCourseDates(courseID: String) async throws -> CourseDates
     func saveCourseProgress(courseID: String, courseProgress: CourseProgressDetails) async
     func loadCourseProgress(courseID: String) async throws -> CourseProgressDetails
+    func updateLocalVideoProgress(blockID: String, progress: Double) async
+    func loadLocalVideoProgress(blockID: String) async -> Double?
 }
 
 public final class CourseBundle {
