@@ -12,10 +12,7 @@ import Foundation
 public enum DashboardLocalization {
   /// Search
   public static let search = DashboardLocalization.tr("Localizable", "SEARCH", fallback: "Search")
-  /// Localizable.strings
-  ///   Dashboard
-  /// 
-  ///   Created by  Stepanok Ivan on 20.09.2022.
+  /// Community Translations for Dashboard (en.lproj)
   public static let title = DashboardLocalization.tr("Localizable", "TITLE", fallback: "Dashboard")
   public enum Empty {
     /// You are not enrolled in any courses yet.

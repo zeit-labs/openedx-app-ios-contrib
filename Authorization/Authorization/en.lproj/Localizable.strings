@@ -1,30 +1,19 @@
-/* 
-  Localizable.strings
-  Authorization
-
-  Created by Vladimir Chekyrta on 13.09.2022.
-  
-*/
-
-"SIGN_IN.LOG_IN_TITLE" = "Sign in";
+/* Community Translations for Authorization (en.lproj) */
 "SIGN_IN.WELCOME_BACK" = "Welcome back! Sign in to access your courses.";
 "SIGN_IN.EMAIL" = "Email";
 "SIGN_IN.EMAIL_OR_USERNAME" = "Email or username";
 "SIGN_IN.PASSWORD" = "Password";
 "SIGN_IN.FORGOT_PASS_BTN" = "Forgot password?";
-"SIGN_IN.AGREEMENT" = "By signing in to this app, you agree to the [%@ End User License Agreement](%@) and [%@ Terms of Service and Honor Code](%@) and you acknowledge that %@ and each Member process your personal data in
-accordance with the [Privacy Policy.](%@)";
+"SIGN_IN.AGREEMENT" = "By signing in to this app, you agree to the [%@ End User License Agreement](%@) and [%@ Terms of Service and Honor Code](%@) and you acknowledge that %@ and each Member process your personal data in\naccordance with the [Privacy Policy.](%@)";
 "SIGN_IN.SSO_HEADING" = "Start today to build your career with confidence";
 "SIGN_IN.SSO_SUPPORTING_TEXT" = "An integrated set of knowledge and empowerment programs to develop the components of the endowment sector and its workers";
 "SIGN_IN.SSO_LOG_IN_TITLE" = "Sign in";
 "SIGN_IN.SSO_LOG_IN_SUBTITLE" = "Log in through the national unified sign-on service";
-
 "ERROR.INVALID_EMAIL_ADDRESS" = "Invalid email address";
 "ERROR.INVALID_PASSWORD_LENGHT" = "Invalid password lenght";
 "ERROR.ACCOUNT_NOT_REGISTERED" = "This %@ account is not linked with any %@ account. Please register.";
 "ERROR.INVALID_EMAIL_ADDRESS_OR_USERNAME" = "Invalid email or username";
 "ERROR.DISABLED_ACCOUNT" = "Your account is disabled. Please contact customer support for assistance.";
-
 "SIGN_UP.SUBTITLE" = "Create an account to start learning today!";
 "SIGN_UP.CREATE_ACCOUNT_BTN" = "Create account";
 "SIGN_UP.HIDE_FIELDS" = "Hide optional fields";
@@ -33,13 +22,11 @@ accordance with the [Privacy Policy.](%@)";
 "SIGN_UP.SUCCESS_SIGNIN_SUBLABEL" = "We just need a little more information before you start learning.";
 "SIGN_UP.AGREEMENT" = "By creating an account, you agree to the [%@ End User License Agreement](%@) and [%@ Terms of Service and Honor Code](%@) and you acknowledge that %@ and each Member process your personal data inaccordance with the [Privacy Policy.](%@)";
 "SIGN_UP.MARKETING_EMAIL_TITLE" = "I agree that %@ may send me marketing messages.";
-
-"FORGOT.TITLE"= "Forgot password";
+"FORGOT.TITLE" = "Forgot password";
 "FORGOT.DESCRIPTION" = "Please enter your log-in or recovery email address below and we will send you an email with instructions.";
 "FORGOT.REQUEST" = "Reset password";
 "FORGOT.CHECK_TITLE" = "Check your email";
 "FORGOT.CHECK_Description" = "We have sent a password recover instructions to your email ";
-
 "CONTINUE_WITH" = "Continue with:";
 "LAST_SIGN_IN" = "Last sign in";
 "OR_SIGN_IN_WITH" = "Or sign in with email:";
@@ -49,9 +36,18 @@ accordance with the [Privacy Policy.](%@)";
 "FACEBOOK" = "Facebook";
 "MICROSOFT" = "Microsoft";
 "OR" = "Or";
-
 "STARTUP.INFO_MESSAGE" = "Courses and programs from the world's best universities in your pocket.";
 "STARTUP.SEARCH_TITLE" = "What do you want to learn?";
 "STARTUP.SEARCH_PLACEHOLDER" = "Search our 3000+ courses";
 "STARTUP.EXPLORE_ALL_COURSES" = "Explore all courses";
 "STARTUP.TITLE" = "Start";
+
+/* --- Custom Overrides for Authorization --- */
+/*  
+  CustomLocalizable.strings
+  Authorization
+
+  Created by Rawan Matar on 09/06/2026.
+  
+ */
+"SIGN_IN.LOG_IN_TITLE" = "Log in";

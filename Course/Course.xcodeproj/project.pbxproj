@@ -86,6 +86,8 @@
 		97C99C362B9A08FE004EEDE2 /* CalendarSyncProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97C99C352B9A08FE004EEDE2 /* CalendarSyncProgressView.swift */; };
 		97CA95252B875EE200A9EDEA /* DatesSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CA95242B875EE200A9EDEA /* DatesSuccessView.swift */; };
 		97E7DF0F2B7C852A00A2A09B /* DatesStatusInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97E7DF0E2B7C852A00A2A09B /* DatesStatusInfoView.swift */; };
+		995A2BBF2FD7E891000E9199 /* CourseProgressCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995A2BBE2FD7E891000E9199 /* CourseProgressCircleView.swift */; };
+		995A2BC12FD7E8A6000E9199 /* SegmentedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995A2BC02FD7E8A6000E9199 /* SegmentedProgressView.swift */; };
 		A52897D12E24F5C1009C7044 /* CourseCompletionCarouselSlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52897D02E24F5C1009C7044 /* CourseCompletionCarouselSlideView.swift */; };
 		A52897D42E24FA9F009C7044 /* CourseOutlineAndProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A52897D32E24FA9F009C7044 /* CourseOutlineAndProgressView.swift */; };
 		A52897D62E2500E5009C7044 /* WhatsNew.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52897D52E2500E5009C7044 /* WhatsNew.framework */; };
@@ -115,8 +117,6 @@
 		CE1AC40C2E06DCC900618645 /* OverallGradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AC40A2E06DCC900618645 /* OverallGradeView.swift */; };
 		CE1AC40D2E06DCC900618645 /* GradeItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AC4092E06DCC900618645 /* GradeItemView.swift */; };
 		CE1AC40E2E06DCC900618645 /* GradeDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AC4082E06DCC900618645 /* GradeDetailsView.swift */; };
-		CE1AC41BFAF7140618645 /* CourseProgressCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AC41AFAF7140618645 /* CourseProgressCircleView.swift */; };
-		CE1AC45F0EDBBF0618645 /* SegmentedProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1AC45E0EDBBF0618645 /* SegmentedProgressView.swift */; };
 		CE4BA8832E0806380050F2C7 /* CourseProgressViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4BA8822E0806380050F2C7 /* CourseProgressViewModelTests.swift */; };
 		CE4BA9162E0AC3790050F2C7 /* CourseContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4BA9142E0AC3790050F2C7 /* CourseContentView.swift */; };
 		CE4BA9192E0AC99A0050F2C7 /* ContentSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4BA9172E0AC99A0050F2C7 /* ContentSegmentedControl.swift */; };
@@ -268,6 +268,8 @@
 		97C99C352B9A08FE004EEDE2 /* CalendarSyncProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSyncProgressView.swift; sourceTree = "<group>"; };
 		97CA95242B875EE200A9EDEA /* DatesSuccessView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatesSuccessView.swift; sourceTree = "<group>"; };
 		97E7DF0E2B7C852A00A2A09B /* DatesStatusInfoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatesStatusInfoView.swift; sourceTree = "<group>"; };
+		995A2BBE2FD7E891000E9199 /* CourseProgressCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseProgressCircleView.swift; sourceTree = "<group>"; };
+		995A2BC02FD7E8A6000E9199 /* SegmentedProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedProgressView.swift; sourceTree = "<group>"; };
 		99AEF08FD75F1509863D3302 /* Pods-App-CourseDetails.debugprod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App-CourseDetails.debugprod.xcconfig"; path = "Target Support Files/Pods-App-CourseDetails/Pods-App-CourseDetails.debugprod.xcconfig"; sourceTree = "<group>"; };
 		9B5D3D31A9CFA08B6C4347BD /* Pods-App-CourseDetails.releasedev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App-CourseDetails.releasedev.xcconfig"; path = "Target Support Files/Pods-App-CourseDetails/Pods-App-CourseDetails.releasedev.xcconfig"; sourceTree = "<group>"; };
 		A47C63D9EB0D866F303D4588 /* Pods-App-Course.releasestage.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App-Course.releasestage.xcconfig"; path = "Target Support Files/Pods-App-Course/Pods-App-Course.releasestage.xcconfig"; sourceTree = "<group>"; };
@@ -301,8 +303,6 @@
 		CE1AC4082E06DCC900618645 /* GradeDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeDetailsView.swift; sourceTree = "<group>"; };
 		CE1AC4092E06DCC900618645 /* GradeItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradeItemView.swift; sourceTree = "<group>"; };
 		CE1AC40A2E06DCC900618645 /* OverallGradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverallGradeView.swift; sourceTree = "<group>"; };
-		CE1AC41AFAF7140618645 /* CourseProgressCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseProgressCircleView.swift; sourceTree = "<group>"; };
-		CE1AC45E0EDBBF0618645 /* SegmentedProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedProgressView.swift; sourceTree = "<group>"; };
 		CE4BA8822E0806380050F2C7 /* CourseProgressViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseProgressViewModelTests.swift; sourceTree = "<group>"; };
 		CE4BA9142E0AC3790050F2C7 /* CourseContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseContentView.swift; sourceTree = "<group>"; };
 		CE4BA9172E0AC99A0050F2C7 /* ContentSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSegmentedControl.swift; sourceTree = "<group>"; };
@@ -793,12 +793,12 @@
 			isa = PBXGroup;
 			children = (
 				A52897DF2E278D7D009C7044 /* ViewAllButton.swift */,
-				CE1AC41AFAF7140618645 /* CourseProgressCircleView.swift */,
 				CE1AC4082E06DCC900618645 /* GradeDetailsView.swift */,
 				CE1AC4092E06DCC900618645 /* GradeItemView.swift */,
 				A52897DD2E277A7C009C7044 /* GradeItemCarouselView.swift */,
+				995A2BBE2FD7E891000E9199 /* CourseProgressCircleView.swift */,
+				995A2BC02FD7E8A6000E9199 /* SegmentedProgressView.swift */,
 				CE1AC40A2E06DCC900618645 /* OverallGradeView.swift */,
-				CE1AC45E0EDBBF0618645 /* SegmentedProgressView.swift */,
 			);
 			path = Elements;
 			sourceTree = "<group>";
@@ -983,6 +983,44 @@
 				en,
 				Base,
 				uk,
+				he,
+				ar,
+				el,
+				ja,
+				fa,
+				sq,
+				"it-IT",
+				"zh-HK",
+				sw,
+				da,
+				"es-419",
+				kk,
+				"fr-CA",
+				"tr-TR",
+				"es-ES",
+				sv,
+				te,
+				ko,
+				bo,
+				"af-ZA",
+				hu,
+				ka,
+				pl,
+				"pt-BR",
+				vi,
+				lv,
+				ru,
+				"zh-CN",
+				"de-DE",
+				uz,
+				fr,
+				id,
+				nl,
+				th,
+				az,
+				"pt-PT",
+				ro,
+				hi,
 			);
 			mainGroup = 0289F8E428E1C3510064F8F3;
 			packageReferences = (
@@ -1037,27 +1075,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "if [[ -f \"${PODS_ROOT}/SwiftGen/bin/swiftgen\" ]]; then\n  \"${PODS_ROOT}/SwiftGen/bin/swiftgen\"\nelse\n  echo \"warning: SwiftGen is not installed. Run 'pod install --repo-update' to install it.\"\nfi\n";
-		};
-		92C3B3183886DDECE1CBAC22 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-App-Course-CourseTests/Pods-App-Course-CourseTests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-App-Course-CourseTests/Pods-App-Course-CourseTests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-App-Course-CourseTests/Pods-App-Course-CourseTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		B2836B9489F24D888A56D857 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1127,6 +1144,7 @@
 			files = (
 				06FD7EE32B1F3FF6008D632B /* DropdownAnimationModifier.swift in Sources */,
 				067B7B542BED339200D1768F /* YoutubePlayerViewControllerHolder.swift in Sources */,
+				995A2BC12FD7E8A6000E9199 /* SegmentedProgressView.swift in Sources */,
 				02FFAD0D29E4347300140E46 /* VideoPlayerViewModel.swift in Sources */,
 				02454CA42A26193F0043052A /* WebView.swift in Sources */,
 				022C64DA29ACEC50000F532B /* HandoutsViewModel.swift in Sources */,
@@ -1197,6 +1215,7 @@
 				CE812FAB2E15157600EDCC63 /* VideoSectionView.swift in Sources */,
 				02228B2F2C221412009A5F28 /* LargestDownloadsView.swift in Sources */,
 				0295C889299BBE8200ABE571 /* CourseNavigationView.swift in Sources */,
+				995A2BBF2FD7E891000E9199 /* CourseProgressCircleView.swift in Sources */,
 				CE83F7A02E5DD516004E0F7B /* CourseContainerViewModel.swift in Sources */,
 				CE83F79E2E5DD4AD004E0F7B /* CourseContainerView.swift in Sources */,
 				CE1AC4012E055CCD00618645 /* CourseProgressScreenView.swift in Sources */,
@@ -1230,8 +1249,6 @@
 				CE1AC40C2E06DCC900618645 /* OverallGradeView.swift in Sources */,
 				CE1AC40D2E06DCC900618645 /* GradeItemView.swift in Sources */,
 				CE1AC40E2E06DCC900618645 /* GradeDetailsView.swift in Sources */,
-				CE1AC41BFAF7140618645 /* CourseProgressCircleView.swift in Sources */,
-				CE1AC45F0EDBBF0618645 /* SegmentedProgressView.swift in Sources */,
 				02454CA82A2619890043052A /* DiscussionView.swift in Sources */,
 				0265B4B728E2141D00E6EAFD /* Strings.swift in Sources */,
 				97C99C362B9A08FE004EEDE2 /* CalendarSyncProgressView.swift in Sources */,

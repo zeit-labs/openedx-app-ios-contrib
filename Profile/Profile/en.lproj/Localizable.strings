@@ -1,11 +1,4 @@
-/*
-  Localizable.strings
-  Profile
-
-  Created by  Stepanok Ivan on 23.09.2022.
-  
-*/
-
+/* Community Translations for Profile (en.lproj) */
 "TITLE" = "Profile";
 "INFO" = "Profile info";
 "ABOUT" = "About Me";
@@ -23,35 +16,27 @@
 "DO_NOT_SELL_INFORMATION" = "Do not sell my personal information";
 "FAQ_TITLE" = "View FAQ";
 "MANAGE_ACCOUNT" = "Manage Account";
-
 "LOGOUT" = "Log out";
 "SWITCH_TO" = "Switch to";
 "FULL_PROFILE" = "full profile";
 "LIMITED_PROFILE" = "limited profile";
-
 "LOGOUT_ALERT.TITLE" = "Confirm log out";
 "LOGOUT_ALERT.TEXT" = "Are you sure you want to log out?";
-
 "DELETE_ALERT.TITLE" = "Warning!";
 "DELETE_ALERT.TEXT" = "Do you really want to delete your account?";
-
 "UNSAVED_DATA_ALERT.TITLE" = "Leave without saving?";
 "UNSAVED_DATA_ALERT.TEXT" = "Changes you have made will be discarded.";
-
 "EDIT.TOO_YONG_USER" = "You must be over 13 years old to have a profile with full access to information.";
 "EDIT.LIMITED_PROFILE_DESCRIPTION" = "A limited profile only shares your username and profile photo.";
 "EDIT.DELETE_ACCOUNT" = "Delete Account";
-
 "EDIT.FIELDS.YEAR_OF_BIRTH" = "Year of birth";
 "EDIT.FIELDS.LOCATION" = "Location";
 "EDIT.FIELDS.SPOKEN_LANGUGAE" = "Spoken language";
 "EDIT.FIELDS.ABOUT_ME" = "About me:";
-
 "EDIT.BOTTOM_SHEET.TITLE" = "Change profile image";
 "EDIT.BOTTOM_SHEET.SELECT" = "Select from gallery";
 "EDIT.BOTTOM_SHEET.REMOVE" = "Remove photo";
 "EDIT.BOTTOM_SHEET.CANCEL" = "Cancel";
-
 "DELETE_ACCOUNT.TITLE" = "Delete Account";
 "DELETE_ACCOUNT.ARE_YOU_SURE" = "Are you sure you want to ";
 "DELETE_ACCOUNT.WANT_TO_DELETE" = "delete your account?";
@@ -61,13 +46,11 @@
 "DELETE_ACCOUNT.CONFIRM" = "Yes, delete account";
 "DELETE_ACCOUNT.BACK_TO_PROFILE" = "Back to profile";
 "DELETE_ACCOUNT.INCORRECT_PASSWORD" = "The password is incorrect. Please try again.";
-
 "SETTINGS.VIDEO_SETTINGS_TITLE" = "Video settings";
 "SETTINGS.WIFI_TITLE" = "Wi-fi only download";
 "SETTINGS.WIFI_DESCRIPTION" = "Only download content when wi-fi is turned on";
 "SETTINGS.VIDEO_QUALITY_TITLE" = "Video streaming quality";
 "SETTINGS.VIDEO_QUALITY_DESCRIPTION" = "Auto (Recommended)";
-
 "SETTINGS.QUALITY_AUTO_TITLE" = "Auto";
 "SETTINGS.QUALITY_AUTO_DESCRIPTION" = "Recommended";
 "SETTINGS.QUALITY_360_TITLE" = "360p";
@@ -75,15 +58,11 @@
 "SETTINGS.QUALITY_540_TITLE" = "540p";
 "SETTINGS.QUALITY_720_TITLE" = "720p";
 "SETTINGS.QUALITY_720_DESCRIPTION" = "Best quality";
-
-
 "SETTINGS.VERSION" = "Version:";
 "SETTINGS.UP_TO_DATE" = "Up-to-date";
 "SETTINGS.TAP_TO_UPDATE" = "Tap to update to version";
 "SETTINGS.TAP_TO_INSTALL" = "Tap to install required app update";
-
 "ERROR.CANNOT_SEND_EMAIL" = "Cannot send email. It seems your email client is not set up.";
-
 "CALENDAR.NEW_CALENDAR" = "New Calendar";
 "CALENDAR.CHANGE_SYNC_OPTIONS" = "Change Sync Options";
 "CALENDAR.ACCOUNT" = "Account";
@@ -92,12 +71,10 @@
 "CALENDAR.UPCOMING_ASSIGNMENTS" = "Upcoming assignments for active courses will appear on this calendar";
 "CALENDAR.CANCEL" = "Cancel";
 "CALENDAR.BEGIN_SYNCING" = "Begin Syncing";
-
 "ASSIGNMENT_STATUS.SYNCED" = "Synced";
 "ASSIGNMENT_STATUS.FAILED" = "Sync Failed";
 "ASSIGNMENT_STATUS.OFFLINE" = "Offline";
 "ASSIGNMENT_STATUS.SYNCING" = "Syncing to calendar...";
-
 "CALENDAR_DIALOG.CALENDAR_ACCESS" = "Calendar Access";
 "CALENDAR_DIALOG.DISABLE_CALENDAR_SYNC" = "Disable Calendar Sync";
 "CALENDAR_DIALOG.CALENDAR_ACCESS_DESCRIPTION" = "To show upcoming assignments and course milestones on your calendar, we need permission to access your calendar.";
@@ -105,7 +82,6 @@
 "CALENDAR_DIALOG.GRANT_CALENDAR_ACCESS" = "Grant Calendar Access";
 "CALENDAR_DIALOG.DISABLE_SYNCING" = "Disable Syncing";
 "CALENDAR_DIALOG.CANCEL" = "Cancel";
-
 "DATES_AND_CALENDAR.TITLE" = "Dates & Calendar";
 "CALENDAR_SYNC.TITLE" = "Calendar Sync";
 "CALENDAR_SYNC.DESCRIPTION" = "Set up calendar sync to show your upcoming assignments and course milestones on your calendar. New assignments and shifted course dates will sync automatically";
@@ -114,7 +90,6 @@
 "OPTIONS.USE_RELATIVE_DATES" = "Use relative dates";
 "OPTIONS.SHOW_RELATIVE_DATES" = "Show relative dates like “Tomorrow” and “Yesterday”";
 "OPTIONS.SHOW_FULL_DATES" = "Show full dates like “January 1, 2021”";
-
 "DATES_AND_CALENDAR.TITLE" = "Dates & Calendar";
 "COURSE_CALENDAR_SYNC.TITLE" = "Course Calendar Sync";
 "COURSE_CALENDAR_SYNC.DESCRIPTION.RECONNECT_REQUIRED" = "Please reconnect your calendar to resume syncing";
@@ -125,16 +100,13 @@
 "OPTIONS.TITLE" = "Options";
 "OPTIONS.USE_RELATIVE_DATES" = "Use relative dates";
 "OPTIONS.SHOW_RELATIVE_DATES" = "Show relative dates like “Tomorrow” and “Yesterday”";
-
 "COURSES_TO_SYNC.TITLE" = "Courses to Sync";
 "COURSES_TO_SYNC.DESCRIPTION" = "Disabling sync for a course will remove all events connected to the course from your synced calendar.";
 "COURSES_TO_SYNC.HIDE_INACTIVE_COURSES" = "Hide Inactive Courses";
 "COURSES_TO_SYNC.HIDE_INACTIVE_COURSES_DESCRIPTION" = "Automatically remove events from courses you haven’t viewed in the last month";
 "COURSES_TO_SYNC.INACTIVE" = "Inactive";
-
 "CALENDAR.DROPDOWN.ICLOUD" = "iCloud";
 "CALENDAR.DROPDOWN.LOCAL" = "Local";
-
 "CALENDAR.DROPDOWN_COLOR.ACCENT" = "Accent";
 "CALENDAR.DROPDOWN_COLOR.RED" = "Red";
 "CALENDAR.DROPDOWN_COLOR.ORANGE" = "Orange";
@@ -143,13 +115,9 @@
 "CALENDAR.DROPDOWN_COLOR.BLUE" = "Blue";
 "CALENDAR.DROPDOWN_COLOR.PURPLE" = "Purple";
 "CALENDAR.DROPDOWN_COLOR.BROWN" = "Brown";
-
 "CALENDAR.COURSE_DATES" = "%@ Course Dates";
-
 "DROP_DOWN_PICKER.SELECT" = "Select";
-
 "SYNC_SELECTOR.SYNCED" = "To Sync";
 "SYNC_SELECTOR.NOT_SYNCED" = "Not Synced";
-
 "SYNC.NO_SYNCED" = "No Synced Courses";
 "SYNC.NO_SYNCED_DESCRIPTION" = "No courses are currently being synced to your calendar.";

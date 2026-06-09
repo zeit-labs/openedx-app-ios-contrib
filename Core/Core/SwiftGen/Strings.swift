@@ -289,10 +289,7 @@ public enum CoreLocalization {
   public enum Mainscreen {
     /// Dashboard
     public static let dashboard = CoreLocalization.tr("Localizable", "MAINSCREEN.DASHBOARD", fallback: "Dashboard")
-    /// Localizable.strings
-    ///   Core
-    /// 
-    ///   Created by Vladimir Chekyrta on 13.09.2022.
+    /// Community Translations for Core (en.lproj)
     public static let discovery = CoreLocalization.tr("Localizable", "MAINSCREEN.DISCOVERY", fallback: "Discover")
     /// In developing
     public static let inDeveloping = CoreLocalization.tr("Localizable", "MAINSCREEN.IN_DEVELOPING", fallback: "In developing")

@@ -16,10 +16,7 @@ public enum DiscoveryLocalization {
   public static func searchResultsDescription(_ p1: Int) -> String {
     return DiscoveryLocalization.tr("Localizable", "searchResultsDescription", p1, fallback: "Plural format key: \"%#@courses@\"")
   }
-  /// Localizable.strings
-  ///   Discovery
-  /// 
-  ///   Created by  Stepanok Ivan on 19.09.2022.
+  /// Community Translations for Discovery (en.lproj)
   public static let title = DiscoveryLocalization.tr("Localizable", "TITLE", fallback: "Discover")
   /// Account Settings
   public static let updateAccountSettings = DiscoveryLocalization.tr("Localizable", "UPDATE_ACCOUNT_SETTINGS", fallback: "Account Settings")

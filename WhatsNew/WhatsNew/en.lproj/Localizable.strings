@@ -1,13 +1,5 @@
-/* 
-  Localizable.strings
-  WhatsNew
-
-  Created by  Stepanok Ivan on 18.10.2023.
-  
-*/
-
+/* Community Translations for WhatsNew (en.lproj) */
 "TITLE" = "What's New";
 "BUTTON_PREVIOUS" = "Previous";
 "BUTTON_NEXT" = "Next";
 "BUTTON_DONE" = "Done";
-

@@ -66,11 +66,11 @@ public enum AuthLocalization {
     public static let emailOrUsername = AuthLocalization.tr("Localizable", "SIGN_IN.EMAIL_OR_USERNAME", fallback: "Email or username")
     /// Forgot password?
     public static let forgotPassBtn = AuthLocalization.tr("Localizable", "SIGN_IN.FORGOT_PASS_BTN", fallback: "Forgot password?")
-    /// Localizable.strings
+    /// CustomLocalizable.strings
     ///   Authorization
     /// 
-    ///   Created by Vladimir Chekyrta on 13.09.2022.
-    public static let logInTitle = AuthLocalization.tr("Localizable", "SIGN_IN.LOG_IN_TITLE", fallback: "Sign in")
+    ///   Created by Rawan Matar on 09/06/2026.
+    public static let logInTitle = AuthLocalization.tr("Localizable", "SIGN_IN.LOG_IN_TITLE", fallback: "Log in")
     /// Password
     public static let password = AuthLocalization.tr("Localizable", "SIGN_IN.PASSWORD", fallback: "Password")
     /// Start today to build your career with confidence
@@ -81,7 +81,7 @@ public enum AuthLocalization {
     public static let ssoLogInTitle = AuthLocalization.tr("Localizable", "SIGN_IN.SSO_LOG_IN_TITLE", fallback: "Sign in")
     /// An integrated set of knowledge and empowerment programs to develop the components of the endowment sector and its workers
     public static let ssoSupportingText = AuthLocalization.tr("Localizable", "SIGN_IN.SSO_SUPPORTING_TEXT", fallback: "An integrated set of knowledge and empowerment programs to develop the components of the endowment sector and its workers")
-    /// Welcome back! Sign in to access your courses.
+    /// Community Translations for Authorization (en.lproj)
     public static let welcomeBack = AuthLocalization.tr("Localizable", "SIGN_IN.WELCOME_BACK", fallback: "Welcome back! Sign in to access your courses.")
   }
   public enum SignUp {

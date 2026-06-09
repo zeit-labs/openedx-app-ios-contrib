@@ -13,10 +13,7 @@ public enum DownloadsLocalization {
   public enum Downloads {
     /// Manage Download Settings
     public static let manageDownloadSettings = DownloadsLocalization.tr("Localizable", "DOWNLOADS.MANAGE_DOWNLOAD_SETTINGS", fallback: "Manage Download Settings")
-    /// Localizable.strings
-    ///   Downloads
-    /// 
-    ///   Created by Ivan Stepanok on 22.02.2025.
+    /// Community Translations for Downloads (en.lproj)
     public static let title = DownloadsLocalization.tr("Localizable", "DOWNLOADS.TITLE", fallback: "Downloads")
     public enum Cell {
       /// All %@ downloaded

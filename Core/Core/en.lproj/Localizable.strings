@@ -1,11 +1,4 @@
-/*
-  Localizable.strings
-  Core
-
-  Created by Vladimir Chekyrta on 13.09.2022.
-  
-*/
-
+/* Community Translations for Core (en.lproj) */
 "MAINSCREEN.DISCOVERY" = "Discover";
 "MAINSCREEN.DASHBOARD" = "Dashboard";
 "MAINSCREEN.IN_DEVELOPING" = "In developing";
@@ -13,9 +6,7 @@
 "MAINSCREEN.PROFILE" = "Profile";
 "MAINSCREEN.LEARN" = "Learn";
 "MAINSCREEN.SOCIAL_REGISTER_BANNER" = "You already set up an %@ account with your %@ account. You have been logged in with that account.";
-
 "VIEW.SNACKBAR.TRY_AGAIN_BTN" = "Try Again";
-
 "ERROR.INVALID_CREDENTIALS" = "Invalid credentials";
 "ERROR.SLOW_OR_NO_INTERNET_CONNECTION" = "Slow or no internet connection";
 "ERROR.NO_CACHED_DATA" = "No cached data for offline mode";
@@ -23,10 +14,8 @@
 "ERROR.UNKNOWN_ERROR" = "Something went wrong";
 "ERROR.WIFI" = "You can only download files over Wi-Fi. You can change this in the settings.";
 "ERROR.AUTHORIZATION_FAILED" = "Authorization failed.";
-
 "ERROR.INTERNET.NO_INTERNET_TITLE" = "No internet connection";
 "ERROR.INTERNET.NO_INTERNET_DESCRIPTION" = "Please connect to the internet to view this content.";
-
 "COURSEWARE.COURSE_CONTENT" = "Course content";
 "COURSEWARE.COURSE_CONTENT_NOT_AVAILABLE" = "This interactive component isn't yet available on mobile.";
 "COURSEWARE.COURSE_UNITS" = "Course units";
@@ -40,16 +29,12 @@
 "COURSEWARE.RESUME" = "Resume";
 "COURSEWARE.RESUME_WITH" = "Resume with:";
 "COURSEWARE.NEXT_SECTION" = "Next section";
-
 "COURSEWARE.NEXT_SECTION_DESCRIPTION_FIRST" = "To proceed with “";
 "COURSEWARE.NEXT_SECTION_DESCRIPTION_LAST" = "” press “Next section”.";
-
 "ERROR.RELOAD" = "Reload";
-
 "DATE.COURSE_STARTS" = "Course Starts";
 "DATE.COURSE_ENDS" = "Course Ends";
 "DATE.COURSE_ENDED" = "Course Ended";
-
 "DATE.ENDED" = "Ended";
 "DATE.START" = "Start";
 "DATE.STARTED" = "Started";
@@ -63,7 +48,6 @@
 "DATE.DUE_TODAY" = "Due Today: %@";
 "DATE.DUE_DATE_PAST" = "%@ Days Past Due: %@";
 "DATE.DUE_IN_LEFT" = "Due in %@ Days: %@";
-
 "ALERT.ACCEPT" = "Accept";
 "ALERT.CANCEL" = "Cancel";
 "ALERT.LOGOUT" = "Log out";
@@ -74,20 +58,16 @@
 "ALERT.DELETE" = "Delete";
 "ALERT.ADD" = "Add";
 "ALERT.REMOVE" = "Remove";
-"ALERT.CALENDAR_SHIFT_PROMPT_REMOVE_COURSE_CALENDAR"="Remove course calendar";
-
+"ALERT.CALENDAR_SHIFT_PROMPT_REMOVE_COURSE_CALENDAR" = "Remove course calendar";
 "NO_INTERNET.OFFLINE" = "Offline";
 "NO_INTERNET.DISMISS" = "Dismiss";
 "NO_INTERNET.RELOAD" = "Reload";
-
 "DATE_FORMAT.MMMM_DD" = "MMMM dd";
 "DATE_FORMAT.MMM_DD_YYYY" = "MMM dd, yyyy";
 "DATE_FORMAT.MMMM_DD_YYYY" = "MMMM dd, yyyy";
-
 "DOWNLOAD_MANAGER.DOWNLOAD" = "Download";
 "DOWNLOAD_MANAGER.DOWNLOADED" = "Downloaded";
 "DOWNLOAD_MANAGER.COMPLETED" = "Completed";
-
 "SETTINGS.VIDEO_DOWNLOAD_QUALITY_TITLE" = "Video download quality";
 "SETTINGS.DOWNLOAD_QUALITY_AUTO_TITLE" = "Auto";
 "SETTINGS.DOWNLOAD_QUALITY_AUTO_DESCRIPTION" = "Recommended";
@@ -96,20 +76,16 @@
 "SETTINGS.DOWNLOAD_QUALITY_540_TITLE" = "540p";
 "SETTINGS.DOWNLOAD_QUALITY_720_TITLE" = "720p";
 "SETTINGS.DOWNLOAD_QUALITY_720_DESCRIPTION" = "Best quality";
-
 "DONE" = "Done";
 "VIEW" = "View";
 "BACK" = "Back";
 "OK" = "Ok";
 "CLOSE" = "Close";
-
 "PICKER.SEARCH" = "Search";
 "PICKER.ACCEPT" = "Accept";
-
 "WEBVIEW.ALERT.OK" = "Ok";
 "WEBVIEW.ALERT.CANCEL" = "Cancel";
 "WEBVIEW.ALERT.CONTINUE" = "Continue";
-
 "REVIEW.VOTE_TITLE" = "Enjoying Open edX?";
 "REVIEW.VOTE_DESCRIPTION" = "Your feedback matters to us. Would you take a moment to rate the app by tapping a star below? Thanks for your support!";
 "REVIEW.FEEDBACK_TITLE" = "Leave Us Feedback";
@@ -120,75 +96,57 @@
 "REVIEW.THANKS_FOR_FEEDBACK_DESCRIPTION" = "We received your feedback and will use it to help improve your learning experience going forward. Thank you for sharing!";
 "REVIEW.BETTER" = "What could have been better?";
 "REVIEW.NOT_NOW" = "Not now";
-
 "REVIEW.BUTTON.SUBMIT" = "Submit";
 "REVIEW.BUTTON.SHARE_FEEDBACK" = "Share Feedback";
 "REVIEW.BUTTON.RATE_US" = "Rate Us";
 "REVIEW.EMAIL.TITLE" = "Select email client:";
-
 "SOCIAL_SIGN_CANCELED" = "The user canceled the sign-in flow.";
-
 "SIGN_IN.LOG_IN_BTN" = "Sign in";
 "SIGN_IN.REGISTER_BTN" = "Register";
 "SIGN_IN.LOG_IN_WITH_SSO_BTN" = "Sign in with SSO";
-
 "TOMORROW" = "Tomorrow";
 "YESTERDAY" = "Yesterday";
-
-"OPEN_IN_BROWSER"="View in Safari";
-
+"OPEN_IN_BROWSER" = "View in Safari";
 "COURSE_DATES.RESET_DATE.RESET_DATE_BANNER.BODY" = "Don't worry - shift our suggested schedule to complete the due assignments without losing any progress.";
 "COURSE_DATES.RESET_DATE.RESET_DATE_BANNER.BUTTON" = "Shift due dates";
 "COURSE_DATES.RESET_DATE.RESET_DATE_BANNER.HEADER" = "Missed some deadlines?";
-
 "COURSE_DATES.RESET_DATE.TAB_INFO_BANNER.BODY" = "We built a suggested schedule to help you stay on track. But don’t worry – it’s flexible so you can learn at your own pace. If you happen to fall behind, you’ll be able to adjust the dates to keep yourself on track.";
 "COURSE_DATES.RESET_DATE.TAB_INFO_BANNER.HEADER" = "";
-
 "COURSE_DATES.RESET_DATE.UPGRADE_TO_COMPLETE_GRADED_BANNER.BODY" = "To complete graded assignments as part of this course, you can upgrade today.";
 "COURSE_DATES.RESET_DATE.UPGRADE_TO_COMPLETE_GRADED_BANNER.BUTTON" = "";
 "COURSE_DATES.RESET_DATE.UPGRADE_TO_COMPLETE_GRADED_BANNER.HEADER" = "";
-
 "COURSE_DATES.RESET_DATE.UPGRADE_TO_RESET_BANNER.BODY" = "You are auditing this course, which means that you are unable to participate in graded assignments. It looks like you missed some important deadlines based on our suggested schedule. To complete graded assignments as part of this course and shift the past due assignments into the future, you can upgrade today.";
 "COURSE_DATES.RESET_DATE.UPGRADE_TO_RESET_BANNER.BUTTON" = "";
 "COURSE_DATES.RESET_DATE.UPGRADE_TO_RESET_BANNER.HEADER" = "";
-
 "COURSE_DATES.RESET_DATE.ERROR_MESSAGE" = "Your dates could not be shifted. Please try again.";
 "COURSE_DATES.RESET_DATE.SUCCESS_MESSAGE" = "Your dates have been successfully shifted.";
 "COURSE_DATES.RESET_DATE.TITLE" = "Course Dates";
-
 "COURSE_DATES.TODAY" = "Today";
 "COURSE_DATES.COMPLETED" = "Completed";
 "COURSE_DATES.PAST_DUE" = "Past due";
 "COURSE_DATES.THIS_WEEK" = "This week";
 "COURSE_DATES.NEXT_WEEK" = "Next week";
 "COURSE_DATES.UPCOMING" = "Upcoming";
-
 "COURSE.STORAGE_ALERT.TITLE" = "Device Storage Full";
 "COURSE.STORAGE_ALERT.DESCRIPTION" = "Your device does not have enough free space to download this content. Please free up some space and try again.";
 "COURSE.STORAGE_ALERT.USED_AND_FREE" = "%@ used, %@ free";
-
 "COURSE.ALERT.CANCEL" = "Cancel";
 "COURSE.ALERT.CLOSE" = "Close";
 "COURSE.ALERT.REMOVE" = "Remove";
 "COURSE.ALERT.DOWNLOAD" = "Download";
 "COURSE.ALERT.TRY_AGAIN" = "Try again";
-
 "COURSE.ALERT.REMOVE_TITLE" = "Remove Offline Content?";
 "COURSE.ALERT.CONFIRM_DOWNLOAD_TITLE" = "Confirm Download";
 "COURSE.ALERT.CONFIRM_DOWNLOAD_CELLULAR_TITLE" = "Download on Cellular?";
-
 "COURSE.ALERT.REMOVE_DESCRIPTION" = "Removing this content will free up %@.";
 "COURSE.ALERT.CONFIRM_DOWNLOAD_DESCRIPTION" = "Downloading this %@ of content will save available blocks offline.";
 "COURSE.ALERT.CONFIRM_DOWNLOAD_CELLULAR_DESCRIPTION" = "Downloading this content will use %@ of cellular data.";
-
 "COURSE.ERROR.DOWNLOAD_FAILED_TITLE" = "Download Failed";
 "COURSE.ERROR.NO_INTERNET_CONNECTION_TITLE" = "No Internet Connection";
 "COURSE.ERROR.WIFI_REQUIRED_TITLE" = "Wi-Fi Required";
-
 "COURSE.ERROR.DOWNLOAD_FAILED_DESCRIPTION" = "Unfortunately, this content failed to download. Please try again later or report this issue.";
 "COURSE.ERROR.NO_INTERNET_CONNECTION_DESCRIPTION" = "Downloading this content requires an active internet connection. Please connect to the internet and try again.";
 "COURSE.ERROR.WIFI_REQUIRED_DESCRIPTION" = "Downloading this content requires an active WiFi connection. Please connect to a WiFi network and try again.";
-
 "DOWNLOAD.DOWNLOAD_LARGE_FILE_MESSAGE" = "The videos you've selected are larger than 1 GB. Do you want to download these videos?";
 "DOWNLOAD.DOWNLOAD" = "Download";
 "ALERT.ACCEPT" = "Accept";

@@ -613,10 +613,7 @@ public enum CourseLocalization {
     public static let courseHasntStarted = CourseLocalization.tr("Localizable", "OUTLINE.COURSE_HASNT_STARTED", fallback: "This course hasn't started yet.")
     /// Course videos
     public static let courseVideos = CourseLocalization.tr("Localizable", "OUTLINE.COURSE_VIDEOS", fallback: "Course videos")
-    /// Localizable.strings
-    ///   Course
-    /// 
-    ///   Created by  Stepanok Ivan on 26.09.2022.
+    /// Community Translations for Course (en.lproj)
     public static func passedTheCourse(_ p1: Any) -> String {
       return CourseLocalization.tr("Localizable", "OUTLINE.PASSED_THE_COURSE", String(describing: p1), fallback: "Congratulations, you have earned this course certificate in “%@.”")
     }

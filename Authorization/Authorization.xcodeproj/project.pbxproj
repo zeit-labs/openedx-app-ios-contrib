@@ -102,6 +102,7 @@
 		7A84BB166492D4E46FBCF01C /* Pods-App-Authorization-AuthorizationTests.debugdev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App-Authorization-AuthorizationTests.debugdev.xcconfig"; path = "Target Support Files/Pods-App-Authorization-AuthorizationTests/Pods-App-Authorization-AuthorizationTests.debugdev.xcconfig"; sourceTree = "<group>"; };
 		90DFBB75EF40580E180D71C8 /* Pods-App-Authorization.debugdev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App-Authorization.debugdev.xcconfig"; path = "Target Support Files/Pods-App-Authorization/Pods-App-Authorization.debugdev.xcconfig"; sourceTree = "<group>"; };
 		96C85172770225EB81A6D2DA /* Pods-App-Authorization.releasedev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App-Authorization.releasedev.xcconfig"; path = "Target Support Files/Pods-App-Authorization/Pods-App-Authorization.releasedev.xcconfig"; sourceTree = "<group>"; };
+		995A2BBC2FD7E240000E9199 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CustomLocalizable.strings; sourceTree = "<group>"; };
 		99C1654A2C0C4F0600DC384D /* ContainerWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerWebView.swift; sourceTree = "<group>"; };
 		99C1654C2C0C4F2F00DC384D /* SSOHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSOHelper.swift; sourceTree = "<group>"; };
 		99C1654E2C0C4F5900DC384D /* SSOWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SSOWebView.swift; sourceTree = "<group>"; };
@@ -264,6 +265,7 @@
 				0770DE6F28D0C08E006D8A5D /* SwiftGen */,
 				071009CC28D1E24000344290 /* Presentation */,
 				0770DE6D28D0C035006D8A5D /* Localizable.strings */,
+				995A2BBB2FD7E240000E9199 /* CustomLocalizable.strings */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -448,6 +450,44 @@
 				en,
 				Base,
 				uk,
+				he,
+				ar,
+				el,
+				ja,
+				fa,
+				sq,
+				"it-IT",
+				"zh-HK",
+				sw,
+				da,
+				"es-419",
+				kk,
+				"fr-CA",
+				"tr-TR",
+				"es-ES",
+				sv,
+				te,
+				ko,
+				bo,
+				"af-ZA",
+				hu,
+				ka,
+				pl,
+				"pt-BR",
+				vi,
+				lv,
+				ru,
+				"zh-CN",
+				"de-DE",
+				uz,
+				fr,
+				id,
+				nl,
+				th,
+				az,
+				"pt-PT",
+				ro,
+				hi,
 			);
 			mainGroup = 0770DE3128D0A318006D8A5D;
 			packageReferences = (
@@ -610,6 +650,14 @@
 				0770DE6C28D0C035006D8A5D /* en */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		995A2BBB2FD7E240000E9199 /* CustomLocalizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				995A2BBC2FD7E240000E9199 /* en */,
+			);
+			name = CustomLocalizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

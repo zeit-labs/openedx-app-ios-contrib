@@ -16,10 +16,7 @@ public enum WhatsNewLocalization {
   public static let buttonNext = WhatsNewLocalization.tr("Localizable", "BUTTON_NEXT", fallback: "Next")
   /// Previous
   public static let buttonPrevious = WhatsNewLocalization.tr("Localizable", "BUTTON_PREVIOUS", fallback: "Previous")
-  /// Localizable.strings
-  ///   WhatsNew
-  /// 
-  ///   Created by  Stepanok Ivan on 18.10.2023.
+  /// Community Translations for WhatsNew (en.lproj)
   public static let title = WhatsNewLocalization.tr("Localizable", "TITLE", fallback: "What's New")
 }
 // swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length

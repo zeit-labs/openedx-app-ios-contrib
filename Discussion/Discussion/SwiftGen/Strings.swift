@@ -30,10 +30,7 @@ public enum DiscussionLocalization {
   public static func searchResultsDescription(_ p1: Int) -> String {
     return DiscussionLocalization.tr("Localizable", "searchResultsDescription", p1, fallback: "Plural format key: \"%#@topics@\"")
   }
-  /// Localizable.strings
-  ///   Discussion
-  /// 
-  ///   Created by  Stepanok Ivan on 12.10.2022.
+  /// Community Translations for Discussion (en.lproj)
   public static let title = DiscussionLocalization.tr("Localizable", "TITLE", fallback: "Discussions")
   /// Plural format key: "%#@votes@"
   public static func votesCount(_ p1: Int) -> String {

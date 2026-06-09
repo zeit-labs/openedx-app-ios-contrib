@@ -48,10 +48,7 @@ public enum ProfileLocalization {
   public static let switchTo = ProfileLocalization.tr("Localizable", "SWITCH_TO", fallback: "Switch to")
   /// Terms of use
   public static let terms = ProfileLocalization.tr("Localizable", "TERMS", fallback: "Terms of use")
-  /// Localizable.strings
-  ///   Profile
-  /// 
-  ///   Created by  Stepanok Ivan on 23.09.2022.
+  /// Community Translations for Profile (en.lproj)
   public static let title = ProfileLocalization.tr("Localizable", "TITLE", fallback: "Profile")
   /// Year of birth:
   public static let yearOfBirth = ProfileLocalization.tr("Localizable", "YEAR_OF_BIRTH", fallback: "Year of birth:")

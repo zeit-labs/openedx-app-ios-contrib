@@ -17,10 +17,7 @@ public enum AppDatesLocalization {
     public static let pastDue = AppDatesLocalization.tr("Localizable", "DATES.PAST_DUE", fallback: "Past Due")
     /// This Week
     public static let thisWeek = AppDatesLocalization.tr("Localizable", "DATES.THIS_WEEK", fallback: "This Week")
-    /// Localizable.strings
-    ///   AppDates
-    /// 
-    ///   Created by Ivan Stepanok on 15.02.2025.
+    /// Community Translations for AppDates (en.lproj)
     public static let title = AppDatesLocalization.tr("Localizable", "DATES.TITLE", fallback: "Dates")
     /// Today
     public static let today = AppDatesLocalization.tr("Localizable", "DATES.TODAY", fallback: "Today")

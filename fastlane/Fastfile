@@ -35,11 +35,9 @@ lane :linting do
 end
 
 lane :unit_tests do
-  # Check if a device is passed from the command line/CI, else default to iPhone 16 Pro
-  test_device = ENV["SCAN_DEVICE"] || "iPhone 16 Pro"
   run_tests(
     workspace: "OpenEdX.xcworkspace",
-    device: test_device,
+    device: "iPhone 16 Pro",
     scheme: "OpenEdXDev",
     xcargs: "-skipPackagePluginValidation -skipMacroValidation" # Ignore swiftLint plugin validation
   )
